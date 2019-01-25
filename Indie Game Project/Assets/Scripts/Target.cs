@@ -7,6 +7,10 @@ public class Target : MonoBehaviour {
     public float health = 100f;
 
 
+
+
+
+
     // Use this for initialization
     void Start()
     {
@@ -31,5 +35,14 @@ public class Target : MonoBehaviour {
     void Death()
     {
         Destroy(gameObject);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "BulletDecal")
+        {
+
+        }
+        
     }
 }

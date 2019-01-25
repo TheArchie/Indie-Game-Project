@@ -5,39 +5,41 @@ using UnityEngine;
 public class Weapon : MonoBehaviour {
 
     public float weaponDamage = 30f; //Amount of damage the weapon does
-    public int maxAmmo = 60;
-    public int magazineAmmo = 20;
+    public int maxAmmo = 60; //Maximum ammo of the gun
+    public int magazineAmmo = 20; //Maximum ammo of the magazine
    [SerializeField]
-    private int currentAmmo;
-    public float fireRate = 10f;
-    public float weaponSpread = 1f;
-    public float weaponRecoil = 1f; 
-    public float reloadTime = 1.5f;
-    private bool isReloading = false;
+    private int currentAmmo; //the guns current ammo
+    public float fireRate = 10f; //firerate of the gun
+    public float weaponSpread = 1f; //spread of the weapon
+    public float weaponRecoil = 1f; //recoil of the weapon
+    public float reloadTime = 1.5f; //time it takes to reload
+    private bool isReloading = false; //is the gun reloading 
 
-    private float fireTime = 0f;
+    private float fireTime = 0f; //
 
-    public Camera cam;
+    public Camera cam; //camera variable
 
-    public Animator animator;
+    public Animator animator; //animator variable for reload animation
 
-    public ParticleSystem muzzleFlash;
+    public ParticleSystem muzzleFlash; //partical system variable for muzzle flash
+    public GameObject impactEffect; //Impact effect Partical System
 
-    [SerializeField]
-    private GameObject bulletDecal;
 
-     void Start()
+    public GameObject bulletDecal; //bullet holes variable
+
+    //When the scene starts make current ammo equal to the magazine ammo
+    void Start()
     {
         currentAmmo = magazineAmmo;
       
     }
 
-     void OnEnable()
+    //When the scene enables, set the reload bool to false
+    void OnEnable()
     {
         isReloading = false;
         animator.SetBool("isReloading", false);       
     }
-
 
     void Update()
     {
@@ -50,13 +52,15 @@ public class Weapon : MonoBehaviour {
             return;
         }
 
-        if (Input.GetButton("Fire1") && Time.time >= fireTime) 
+        if (Input.GetButton("Fire1") && Time.time >= fireTime) //Firing the gun
         {
             fireTime = Time.time + 1f / fireRate;
             Shoot();
             Debug.Log("Gun Fired");
-        }        
-	}
+        }
+
+        Destroy(GameObject.FindWithTag("BulletDecal"),2f); //Destroy bullet decals after 2 seconds
+    }
 
     IEnumerator Reload()
     {
@@ -92,10 +96,13 @@ public class Weapon : MonoBehaviour {
             {
                 target.Damage(weaponDamage);
             }
+            Instantiate(impactEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+
             SpawnDecal(hitInfo);
         }
     }
 
+    //Function for spawning the decals
     void SpawnDecal(RaycastHit hitInfo)
     {
         var decal = Instantiate(bulletDecal);
