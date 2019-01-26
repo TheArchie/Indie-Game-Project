@@ -58,8 +58,6 @@ public class Weapon : MonoBehaviour {
             Shoot();
             Debug.Log("Gun Fired");
         }
-
-        Destroy(GameObject.FindWithTag("BulletDecal"),2f); //Destroy bullet decals after 2 seconds
     }
 
     IEnumerator Reload()
@@ -96,17 +94,19 @@ public class Weapon : MonoBehaviour {
             {
                 target.Damage(weaponDamage);
             }
-            Instantiate(impactEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+            GameObject impacteffectGO = Instantiate(impactEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+            Destroy(impacteffectGO, 1.5f);
 
             SpawnDecal(hitInfo);
         }
     }
 
-    //Function for spawning the decals
+    //Function for spawning the decals and destroying them 
     void SpawnDecal(RaycastHit hitInfo)
     {
         var decal = Instantiate(bulletDecal);
         decal.transform.position = hitInfo.point;
         decal.transform.forward = hitInfo.normal * -1f;
+        Destroy(decal, 2f);
     }
 }
