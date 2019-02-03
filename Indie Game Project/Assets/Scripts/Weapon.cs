@@ -25,16 +25,15 @@ public class Weapon : MonoBehaviour {
 
     public GameObject bulletDecal; //bullet holes variable
 
-    Vector3 randomiseSpray(Vector3 currentDirection)
+    /*Vector3 randomiseSpray(Vector3 currentDirection)
     {
         return new Vector3(currentDirection.x + Random.Range(0f, 0f), currentDirection.y + Random.Range(0f, 0.1f), currentDirection.z);
-    }
+    }*/
 
     //When the scene starts make current ammo equal to the magazine ammo
     void Start()
     {
-        currentAmmo = magazineAmmo;
-      
+        currentAmmo = magazineAmmo;     
     }
 
     //When the scene enables, set the reload bool to false
@@ -53,6 +52,13 @@ public class Weapon : MonoBehaviour {
         {
             StartCoroutine(Reload());
             return;
+        }
+        if(maxAmmo <= 0)
+        {
+            isReloading = false;
+            animator.SetBool("isReloading", false);
+            StopCoroutine(Reload());           
+            Debug.Log("Gun is Empty");
         }
 
         if (Input.GetButton("Fire1") && Time.time >= fireTime) //Firing the gun
@@ -88,7 +94,7 @@ public class Weapon : MonoBehaviour {
         currentAmmo--;
 
         RaycastHit hitInfo;
-        if (Physics.Raycast(cam.transform.position, randomiseSpray(cam.transform.forward), out hitInfo))
+        if (Physics.Raycast(cam.transform.position, /*randomiseSpray(cam.transform.forward)*/ cam.transform.forward, out hitInfo))
         {
             Debug.Log(hitInfo.transform.name);
             Debug.Log(currentAmmo);

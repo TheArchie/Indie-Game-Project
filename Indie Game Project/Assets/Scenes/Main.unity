@@ -2549,7 +2549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponDamage: 30
-  maxAmmo: 60
+  maxAmmo: 20
   magazineAmmo: 20
   currentAmmo: 0
   fireRate: 10
