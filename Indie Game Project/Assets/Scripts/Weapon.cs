@@ -10,8 +10,6 @@ public class Weapon : MonoBehaviour {
    [SerializeField]
     private int currentAmmo; //the guns current ammo
     public float fireRate = 10f; //firerate of the gun
-    public float weaponSpread = 1f; //spread of the weapon
-    public float weaponRecoil = 1f; //recoil of the weapon
     public float reloadTime = 1.5f; //time it takes to reload
     private bool isReloading = false; //is the gun reloading 
 
@@ -26,6 +24,11 @@ public class Weapon : MonoBehaviour {
 
 
     public GameObject bulletDecal; //bullet holes variable
+
+    Vector3 randomiseSpray(Vector3 currentDirection)
+    {
+        return new Vector3(currentDirection.x + Random.Range(0f, 0f), currentDirection.y + Random.Range(0f, 0.1f), currentDirection.z);
+    }
 
     //When the scene starts make current ammo equal to the magazine ammo
     void Start()
@@ -83,8 +86,9 @@ public class Weapon : MonoBehaviour {
     {
         muzzleFlash.Play();
         currentAmmo--;
+
         RaycastHit hitInfo;
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitInfo));
+        if (Physics.Raycast(cam.transform.position, randomiseSpray(cam.transform.forward), out hitInfo))
         {
             Debug.Log(hitInfo.transform.name);
             Debug.Log(currentAmmo);

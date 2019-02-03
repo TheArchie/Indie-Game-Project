@@ -6,14 +6,14 @@ public class Target : MonoBehaviour {
 
     public float health = 100f;
 
+    public float enemyDamage = 25f;
 
-
-
-
+    private PlayerAttributes player;
 
     // Use this for initialization
     void Start()
     {
+        player = GetComponent<PlayerAttributes>();
 
     }
 
@@ -39,9 +39,11 @@ public class Target : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "BulletDecal")
+        PlayerAttributes player = collision.collider.GetComponent<PlayerAttributes>();
+        if(player != null)
         {
-
+           player.DamagePlayer(enemyDamage);
+            Debug.Log("Player Health is " + player.playerInfo.currentHealth);
         }
         
     }
