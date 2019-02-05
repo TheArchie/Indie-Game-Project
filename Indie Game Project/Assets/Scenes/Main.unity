@@ -422,6 +422,7 @@ GameObject:
   - component: {fileID: 241120268}
   - component: {fileID: 241120264}
   - component: {fileID: 241120267}
+  - component: {fileID: 241120269}
   - component: {fileID: 241120266}
   - component: {fileID: 241120265}
   m_Layer: 0
@@ -483,7 +484,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 241120263}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83c81407209f85e4c87c0cda8b32868e, type: 3}
   m_Name: 
@@ -557,6 +558,20 @@ Transform:
   m_Father: {fileID: 1318352760}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &241120269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 241120263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d01fa8ad0622b114d954164f5a9863d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bobbingSpeed: 0.18
+  bobbingAmount: 0.05
+  midpoint: 0.6
 --- !u!1 &332661877
 GameObject:
   m_ObjectHideFlags: 0
@@ -1756,16 +1771,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 136bd006a88b4db41b6ecf145f8988ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 5
+  playerSpeed: 3.5
   jumpForce: 40
   Ysensitivity: 1
   Xsensitivity: 1
-  yMin: -45
-  yMax: 45
-  pitch: 0
+  yMin: -70
+  yMax: 90
+  mouseDirection: 0
   rgb: {fileID: 1318352759}
   cam: {fileID: 241120268}
-  cursorLock: 0
+  cursorLock: 1
+  headbob: {fileID: 241120269}
 --- !u!1 &1340524813
 GameObject:
   m_ObjectHideFlags: 0
@@ -2087,7 +2103,7 @@ GameObject:
   - component: {fileID: 1437781601}
   - component: {fileID: 1437781600}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: HUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -53,6 +53,7 @@ public class Weapon : MonoBehaviour {
             StartCoroutine(Reload());
             return;
         }
+
         if(maxAmmo <= 0)
         {
             isReloading = false;
@@ -66,6 +67,11 @@ public class Weapon : MonoBehaviour {
             fireTime = Time.time + 1f / fireRate;
             Shoot();
             Debug.Log("Gun Fired");
+        }
+
+        if(Input.GetButton("Reload") && currentAmmo < magazineAmmo) //Manual Reload using button press
+        {
+            ReloadWeapon();
         }
     }
 
@@ -118,5 +124,11 @@ public class Weapon : MonoBehaviour {
         decal.transform.position = hitInfo.point;
         decal.transform.forward = hitInfo.normal * -1f;
         Destroy(decal, 2f);
+    }
+
+    void ReloadWeapon()
+    {   
+            StartCoroutine(Reload());
+            return;
     }
 }

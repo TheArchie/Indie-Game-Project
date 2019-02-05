@@ -11,6 +11,17 @@ public class PlayerAttributes : MonoBehaviour {
         public float currentStamina;
         public float maxHealth = 100f;
         public float maxStamina = 100f;
+
+        public void playerHealth()
+        {
+            currentHealth = maxHealth;
+            Debug.Log("Health is " + currentHealth);
+        }
+        public void playerStamina()
+        {
+            currentStamina = maxStamina;
+            Debug.Log("Stamina is " + currentStamina);
+        }
     }
 
     public PlayerInformation playerInfo = new PlayerInformation();
@@ -19,10 +30,9 @@ public class PlayerAttributes : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        playerInfo.currentHealth = playerInfo.maxHealth;
-        Debug.Log("Health is " + playerInfo.currentHealth);
-        playerInfo.currentStamina = playerInfo.maxStamina;
-        Debug.Log("Stamina is " + playerInfo.currentStamina);
+        playerInfo.playerHealth();
+
+        playerInfo.playerStamina();
 	}
 	
 	// Update is called once per frame
@@ -45,5 +55,27 @@ public class PlayerAttributes : MonoBehaviour {
     public void Die()
     {
         Destroy(gameObject);
+    }
+
+    public void staminaLoss(float stamina)
+    {
+        playerInfo.currentStamina -= stamina;
+        {
+            if(playerInfo.currentStamina <= 0)
+            {
+                playerInfo.currentStamina = 0;
+            }          
+        }
+    }
+
+    public void staminaGain(float stamina)
+    {
+        playerInfo.currentStamina += stamina;
+        {
+            if(playerInfo.currentStamina >= 100)
+            {
+                playerInfo.currentStamina = 100;
+            }
+        }
     }
 }

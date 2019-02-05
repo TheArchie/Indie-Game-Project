@@ -4,27 +4,38 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    public float playerSpeed = 5.0f;
+    public float playerSpeed = 3.5f;
     public float jumpForce = 40.0f;
 
     public float Ysensitivity = 1f;
     public float Xsensitivity = 1f;
-    public float yMin = -45f;
-    public float yMax = 45f;
-    public float pitch;
+    public float yMin = -70f;
+    public float yMax = 90f;
+    public float mouseDirection;
+
+    public bool increaseStamina;
+    public bool staminaGone;
+
+    PlayerAttributes playerInfo;
+    private PlayerAttributes stamina;
 
     [SerializeField]
     private Rigidbody rgb;
 
     public Transform cam;
 
-    public bool cursorLock; 
+    public bool cursorLock;
+
+    public HeadBobbing headbob;
 
     void Start()
     {
         rgb = GetComponent<Rigidbody>();
         LockMouse();
-
+        headbob.GetComponent<HeadBobbing>();
+        playerInfo = GetComponent<PlayerAttributes>();
+        increaseStamina = true;
+        StartCoroutine("UpdateStamina");
     }
 
     // Update is called once per frame
@@ -47,6 +58,29 @@ public class PlayerController : MonoBehaviour {
 
         transform.Translate(moveHorizontal, 0, moveVertical);
 
+        if(Input.GetButtonDown("Sprint"))
+        {
+            playerSpeed = 7.0f;
+            increaseStamina = false;
+            Debug.Log("Sprint");
+            headbob.bobbingAmount = 0.08f;
+            headbob.bobbingSpeed = 0.2f;
+        }else if(Input.GetButtonUp("Sprint"))
+        {
+            playerSpeed = 3.5f;
+            increaseStamina = true;
+            Debug.Log("Normal");
+            headbob.bobbingAmount = 0.05f;
+            headbob.bobbingSpeed = 0.18f;
+        }
+
+        if(playerInfo.playerInfo.currentStamina <= 0)
+        {
+            staminaGone = true;
+            playerSpeed = 3.5f;
+        }
+        
+
         //Alternative Player Movement
 
         /*float moveHorizontal = Input.GetAxis("Horizontal");
@@ -68,25 +102,41 @@ public class PlayerController : MonoBehaviour {
     void MouseLook()
     {
         float mouseX = Input.GetAxis("Mouse X") * Xsensitivity;
-        pitch -= Input.GetAxis("Mouse Y") * Ysensitivity;
-        pitch = Mathf.Clamp(pitch, yMin, yMax);
+        mouseDirection -= Input.GetAxis("Mouse Y") * Ysensitivity;
+        mouseDirection = Mathf.Clamp(mouseDirection, yMin, yMax);
 
         transform.Rotate(0, mouseX, 0);
-        Quaternion fpsCam = Quaternion.Euler(pitch, 0, 0);
+        Quaternion fpsCam = Quaternion.Euler(mouseDirection, 0, 0);
         cam.localRotation = fpsCam;
     }
 
     void LockMouse()
     {
-        if(cursorLock = true)
+        if(cursorLock == true)
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-        }else
+        }else if(cursorLock == false)
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
        
+    }
+
+    IEnumerator UpdateStamina()
+    {
+        Debug.Log(increaseStamina);
+        while (true)
+        {
+            if(increaseStamina)
+            {
+                playerInfo.staminaGain(10);              
+            }else
+            {
+                playerInfo.staminaLoss(10);
+            }
+            yield return new WaitForSeconds(1);
+        }
     }
 }
