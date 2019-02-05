@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
+
     public float playerSpeed = 3.5f;
     public float jumpForce = 40.0f;
 
@@ -13,6 +14,8 @@ public class PlayerController : MonoBehaviour {
     public float yMax = 90f;
     public float mouseDirection;
 
+    public float staminalossRate = 1f;
+    public float staminagainRate = 10f;
     public bool increaseStamina;
     public bool staminaGone;
 
@@ -77,6 +80,7 @@ public class PlayerController : MonoBehaviour {
         if(playerInfo.playerInfo.currentStamina <= 0)
         {
             staminaGone = true;
+            increaseStamina = true;
             playerSpeed = 3.5f;
         }
         
@@ -131,12 +135,14 @@ public class PlayerController : MonoBehaviour {
         {
             if(increaseStamina)
             {
-                playerInfo.staminaGain(10);              
+                playerInfo.staminaGain(staminagainRate);
+                yield return new WaitForSeconds(1f);
             }else
             {
-                playerInfo.staminaLoss(10);
+                playerInfo.staminaLoss(staminalossRate);
+                yield return new WaitForSeconds(0.1f);
             }
-            yield return new WaitForSeconds(1);
+            //yield return new WaitForSeconds(0.1f);
         }
     }
 }

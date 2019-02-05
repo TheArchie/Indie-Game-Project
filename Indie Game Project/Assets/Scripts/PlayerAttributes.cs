@@ -31,7 +31,6 @@ public class PlayerAttributes : MonoBehaviour {
 	void Start ()
     {
         playerInfo.playerHealth();
-
         playerInfo.playerStamina();
 	}
 	

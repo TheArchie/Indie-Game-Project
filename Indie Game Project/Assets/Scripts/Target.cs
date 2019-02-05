@@ -14,7 +14,6 @@ public class Target : MonoBehaviour {
     void Start()
     {
         player = GetComponent<PlayerAttributes>();
-
     }
 
     // Update is called once per frame
