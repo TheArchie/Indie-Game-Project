@@ -10,10 +10,9 @@ public class SwitchingWeapons : MonoBehaviour {
 	void Start ()
     {
         SelectWeapon();
-		
 	}
 
-    // Update is called once per frame
+    // Change between weapons using the Scroll Wheel and the Numbers
     void Update()
     {
         int previousweaponChoice = weaponChoice;

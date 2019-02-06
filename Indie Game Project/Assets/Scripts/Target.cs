@@ -43,7 +43,6 @@ public class Target : MonoBehaviour {
         {
            player.DamagePlayer(enemyDamage);
             Debug.Log("Player Health is " + player.playerInfo.currentHealth);
-        }
-        
+        }       
     }
 }

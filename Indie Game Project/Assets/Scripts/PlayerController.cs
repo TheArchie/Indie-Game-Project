@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-
+    //Player Movement Variables
     public float playerSpeed = 3.5f;
     public float jumpForce = 40.0f;
 
+    //Mouse Look Variables
     public float Ysensitivity = 1f;
     public float Xsensitivity = 1f;
     public float yMin = -70f;
     public float yMax = 90f;
     public float mouseDirection;
 
+    //Stamina Variables
     public float staminalossRate = 1f;
     public float staminagainRate = 10f;
     public bool increaseStamina;

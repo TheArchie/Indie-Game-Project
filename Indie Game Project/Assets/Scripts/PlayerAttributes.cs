@@ -12,6 +12,8 @@ public class PlayerAttributes : MonoBehaviour {
         public float maxHealth = 100f;
         public float maxStamina = 100f;
 
+        public bool playerisDead;
+
         public void playerHealth()
         {
             currentHealth = maxHealth;
@@ -54,6 +56,10 @@ public class PlayerAttributes : MonoBehaviour {
     public void Die()
     {
         Destroy(gameObject);
+        playerInfo.playerisDead = true;
+        {
+            Debug.Log("Dead");
+        }
     }
 
     public void staminaLoss(float stamina)

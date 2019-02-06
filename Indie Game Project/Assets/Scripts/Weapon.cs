@@ -124,6 +124,8 @@ public class Weapon : MonoBehaviour {
         decal.transform.position = hitInfo.point;
         decal.transform.forward = hitInfo.normal * -1f;
         Destroy(decal, 2f);
+
+        decal.transform.parent = hitInfo.transform;
     }
 
     void ReloadWeapon()
