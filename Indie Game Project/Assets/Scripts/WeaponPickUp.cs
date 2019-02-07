@@ -9,6 +9,10 @@ public class WeaponPickUp : MonoBehaviour {
     public Collider boxCollider;
     public Weapon weaponScript;
 
+    public SwitchingWeapons weaponSwitch;
+
+    public string currentWeapon;
+
     public bool weaponEquipped;
 
     public float xPos;
@@ -20,34 +24,27 @@ public class WeaponPickUp : MonoBehaviour {
     {
         weaponScript = GetComponent<Weapon>();
         weaponScript.enabled = false;
+        weaponSwitch.GetComponent<SwitchingWeapons>();
         weaponEquipped = false;
+        {
+            Debug.Log("Weapon not Equipped");
+        }
+        currentWeapon = gameObject.name;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        hand.SetActive(true);
-    }
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         obj.transform.SetParent(hand.transform, false);
         transform.localPosition = new Vector3(xPos, yPos, zPos);
         weaponScript.enabled = true;
-        hand.SetActive(true);
+        GetComponent<BoxCollider>().enabled = false;
+        print(currentWeapon);
         weaponEquipped = true;
-        {
-            Debug.Log("Weapon is Equipped");
-        }
-        Destroy(boxCollider);
-
-        if(weaponEquipped == true)
-        {
-
-        }
     }
 }

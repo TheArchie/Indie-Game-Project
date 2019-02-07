@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour {
 
+    private int currentBulletCount;
+
     public float weaponDamage = 30f; //Amount of damage the weapon does
     public int maxAmmo = 60; //Maximum ammo of the gun
     public int magazineAmmo = 20; //Maximum ammo of the magazine
-   [SerializeField]
+    [SerializeField]
     private int currentAmmo; //the guns current ammo
     public float fireRate = 10f; //firerate of the gun
+    public float weaponSpread = 1f; //spread of the weapon
+    public float weaponRecoil = 0.05f; //recoil of the weapon
     public float reloadTime = 1.5f; //time it takes to reload
     private bool isReloading = false; //is the gun reloading 
 
@@ -25,22 +29,17 @@ public class Weapon : MonoBehaviour {
 
     public GameObject bulletDecal; //bullet holes variable
 
-    /*Vector3 randomiseSpray(Vector3 currentDirection)
-    {
-        return new Vector3(currentDirection.x + Random.Range(0f, 0f), currentDirection.y + Random.Range(0f, 0.1f), currentDirection.z);
-    }*/
-
     //When the scene starts make current ammo equal to the magazine ammo
     void Start()
     {
-        currentAmmo = magazineAmmo;     
+        currentAmmo = magazineAmmo;
     }
 
     //When the scene enables, set the reload bool to false
     void OnEnable()
     {
         isReloading = false;
-        animator.SetBool("isReloading", false);       
+        animator.SetBool("isReloading", false);
     }
 
     void Update()
@@ -48,31 +47,32 @@ public class Weapon : MonoBehaviour {
         if (isReloading)
             return;
 
-        if (currentAmmo <= 0)
+        if (currentAmmo <= 0 && maxAmmo >= 1)
         {
             StartCoroutine(Reload());
+            // When reloading, we reset the current bullet count
+            currentBulletCount = 0;
             return;
         }
-
-        if(maxAmmo <= 0)
+        else if (currentAmmo <= 0 && maxAmmo <= 0)
         {
-            isReloading = false;
-            animator.SetBool("isReloading", false);
-            StopCoroutine(Reload());           
-            Debug.Log("Gun is Empty");
+            currentBulletCount = 0;
+            return;
         }
 
         if (Input.GetButton("Fire1") && Time.time >= fireTime) //Firing the gun
         {
             fireTime = Time.time + 1f / fireRate;
             Shoot();
+            currentBulletCount++; //we add 1 to the current bullet count, which will increase the range for the spray
             Debug.Log("Gun Fired");
         }
 
-        if(Input.GetButton("Reload") && currentAmmo < magazineAmmo) //Manual Reload using button press
-        {
-            ReloadWeapon();
-        }
+        //if the player stop clicking, we reset the current bullet count
+        if (Input.GetButtonUp("Fire1"))
+            currentBulletCount = 0;
+
+        ManualReload();
     }
 
     IEnumerator Reload()
@@ -93,20 +93,25 @@ public class Weapon : MonoBehaviour {
         isReloading = false;
     }
 
+    Vector3 RandomizeSpray(Vector3 currentDir)
+    {
+        float r = currentBulletCount * weaponRecoil; //Increase the spray size depending on the current count of bullet fired
+        return new Vector3(currentDir.x + Random.Range(0, r), currentDir.y + Random.Range(0, r), currentDir.z);
+    }
+
     //Shoot function that plays a muzzle flash 
     void Shoot()
     {
         muzzleFlash.Play();
         currentAmmo--;
-
         RaycastHit hitInfo;
-        if (Physics.Raycast(cam.transform.position, /*randomiseSpray(cam.transform.forward)*/ cam.transform.forward, out hitInfo))
+        if (Physics.Raycast(cam.transform.position, RandomizeSpray(cam.transform.forward), out hitInfo))
         {
             Debug.Log(hitInfo.transform.name);
             Debug.Log(currentAmmo);
 
             Target target = hitInfo.transform.GetComponent<Target>();
-            if(target != null)
+            if (target != null)
             {
                 target.Damage(weaponDamage);
             }
@@ -124,13 +129,13 @@ public class Weapon : MonoBehaviour {
         decal.transform.position = hitInfo.point;
         decal.transform.forward = hitInfo.normal * -1f;
         Destroy(decal, 2f);
-
-        decal.transform.parent = hitInfo.transform;
     }
 
-    void ReloadWeapon()
-    {   
+    void ManualReload()
+    {
+        if(Input.GetButtonDown("Reload"))
+        {
             StartCoroutine(Reload());
-            return;
+        }
     }
 }

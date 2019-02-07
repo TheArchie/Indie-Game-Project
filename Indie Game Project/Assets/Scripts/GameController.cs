@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        hand.SetActive(false);
+        //hand.SetActive(false);
         deathCam.enabled = false;
 
         //playeratts = GetComponent<PlayerAttributes>();

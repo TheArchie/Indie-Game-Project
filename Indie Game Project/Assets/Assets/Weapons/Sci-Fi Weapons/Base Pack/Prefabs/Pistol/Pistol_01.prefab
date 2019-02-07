@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4054100971495624}
   - component: {fileID: 114259167600573582}
   - component: {fileID: 65479422934783462}
-  - component: {fileID: 114201650784607582}
+  - component: {fileID: 114761077453594614}
   m_Layer: 0
   m_Name: Pistol_01
   m_TagString: Weapon
@@ -688,27 +688,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.3, y: 0.2, z: 0.3}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114201650784607582
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1374600452982646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3e559bbb9dc954eb953ee5f9b056f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hand: {fileID: 0}
-  obj: {fileID: 1374600452982646}
-  boxCollider: {fileID: 65479422934783462}
-  weaponScript: {fileID: 114259167600573582}
-  weaponEquipped: 0
-  xPos: 0.23
-  yPos: -0.22
-  zPos: 0.417
 --- !u!114 &114259167600573582
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -724,8 +705,10 @@ MonoBehaviour:
   maxAmmo: 100
   magazineAmmo: 12
   currentAmmo: 0
-  fireRate: 10
-  reloadTime: 1.5
+  fireRate: 3
+  weaponSpread: 1
+  weaponRecoil: 0.02
+  reloadTime: 1
   cam: {fileID: 0}
   animator: {fileID: 0}
   muzzleFlash: {fileID: 198827795747237244}
@@ -733,6 +716,29 @@ MonoBehaviour:
     type: 2}
   bulletDecal: {fileID: 1476870098304274, guid: 12a203af241627045962e95044620170,
     type: 2}
+--- !u!114 &114761077453594614
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1374600452982646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c3e559bbb9dc954eb953ee5f9b056f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hand: {fileID: 0}
+  obj: {fileID: 1374600452982646}
+  boxCollider: {fileID: 65479422934783462}
+  weaponScript: {fileID: 114259167600573582}
+  weaponSwitch: {fileID: 0}
+  currentWeapon: 
+  rifle: {fileID: 0}
+  rifleEquipped: 0
+  pistolEquipped: 0
+  xPos: 0.23
+  yPos: -0.22
+  zPos: 0.417
 --- !u!198 &198827795747237244
 ParticleSystem:
   m_ObjectHideFlags: 1
