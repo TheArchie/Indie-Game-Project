@@ -25,8 +25,6 @@ public class Weapon : MonoBehaviour {
 
     public ParticleSystem muzzleFlash; //partical system variable for muzzle flash
     public GameObject impactEffect; //Impact effect Partical System
-
-
     public GameObject bulletDecal; //bullet holes variable
 
     //When the scene starts make current ammo equal to the magazine ammo
@@ -129,6 +127,7 @@ public class Weapon : MonoBehaviour {
         decal.transform.position = hitInfo.point;
         decal.transform.forward = hitInfo.normal * -1f;
         Destroy(decal, 2f);
+        decal.transform.parent = hitInfo.transform;
     }
 
     void ManualReload()

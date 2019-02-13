@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
     //Player Movement Variables
     public float playerSpeed = 3.5f;
     public float jumpForce = 40.0f;
+    public bool isCrouching;
 
     //Mouse Look Variables
     public float Ysensitivity = 1f;
@@ -27,6 +28,9 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     private Rigidbody rgb;
 
+    [SerializeField]
+    private CapsuleCollider capCollider;
+
     public Transform cam;
 
     public bool cursorLock;
@@ -36,11 +40,13 @@ public class PlayerController : MonoBehaviour {
     void Start()
     {
         rgb = GetComponent<Rigidbody>();
+        capCollider = GetComponent<CapsuleCollider>();
         LockMouse();
         headbob.GetComponent<HeadBobbing>();
         playerInfo = GetComponent<PlayerAttributes>();
         increaseStamina = true;
         StartCoroutine("UpdateStamina");
+        isCrouching = false;
     }
 
     // Update is called once per frame
@@ -48,6 +54,8 @@ public class PlayerController : MonoBehaviour {
     {
         Jump();
         Movement();
+        //Interact();
+        Crouch();
     }
 
     private void FixedUpdate()
@@ -70,13 +78,25 @@ public class PlayerController : MonoBehaviour {
             Debug.Log("Sprint");
             headbob.bobbingAmount = 0.08f;
             headbob.bobbingSpeed = 0.2f;
-        }else if(Input.GetButtonUp("Sprint"))
+            if(isCrouching == true)
+            {
+                playerSpeed = 1.5f;
+                headbob.bobbingAmount = 0.03f;
+                headbob.bobbingSpeed = 0.1f;
+            }
+        }else if(Input.GetButtonUp("Sprint")) 
         {
             playerSpeed = 3.5f;
             increaseStamina = true;
             Debug.Log("Normal");
             headbob.bobbingAmount = 0.05f;
             headbob.bobbingSpeed = 0.18f;
+            if (isCrouching == true)
+            {
+                playerSpeed = 1f;
+                headbob.bobbingAmount = 0.01f;
+                headbob.bobbingSpeed = 0.05f;
+            }
         }
 
         if(playerInfo.playerInfo.currentStamina <= 0)
@@ -101,6 +121,26 @@ public class PlayerController : MonoBehaviour {
         {
             rgb.AddForce(new Vector3(0f, jumpForce, 0f), ForceMode.Impulse);
             Debug.Log("Player Jumped");
+        }
+    }
+
+    void Crouch()
+    {
+        if(Input.GetButtonDown("Crouch"))
+        {
+            isCrouching = true;
+            capCollider.height = 0.1f;
+            playerSpeed = 1f;
+            headbob.bobbingAmount = 0.01f;
+            headbob.bobbingSpeed = 0.05f;
+        }
+        else if(Input.GetButtonUp("Crouch"))
+        {
+            isCrouching = false;
+            capCollider.height = 1.8f;
+            playerSpeed = 3.5f;
+            headbob.bobbingAmount = 0.05f;
+            headbob.bobbingSpeed = 0.18f;
         }
 
     }
@@ -147,4 +187,13 @@ public class PlayerController : MonoBehaviour {
             //yield return new WaitForSeconds(0.1f);
         }
     }
+
+    /*void Interact()
+    {
+        RaycastHit hitInfo;
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitInfo))
+        {
+            Debug.Log(hitInfo.transform.name);
+        }
+    }*/
 }

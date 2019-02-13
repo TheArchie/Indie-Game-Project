@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponPickUp : MonoBehaviour {
+public class WeaponPickUp2 : MonoBehaviour {
 
     public GameObject hand;
     public GameObject obj;
@@ -56,6 +56,7 @@ public class WeaponPickUp : MonoBehaviour {
         if (Input.GetButton("Interact"))
         {
             obj.transform.SetParent(hand.transform, false);
+            obj.SetActive(false);
             transform.localPosition = new Vector3(xPos, yPos, zPos);
             weaponScript.enabled = true;
             GetComponent<BoxCollider>().enabled = false;
