@@ -113,6 +113,34 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &138193512
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 138193513}
+  m_Layer: 0
+  m_Name: No Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &138193513
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 138193512}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 219500571}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &219500570
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,7 +169,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 138193513}
   m_Father: {fileID: 241120268}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -681,6 +710,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   enemyDamage: 25
+  xpReward: 75
+  player: {fileID: 1318352761}
 --- !u!1 &492993287
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,8 +792,8 @@ GameObject:
   - component: {fileID: 534447000}
   - component: {fileID: 534446999}
   m_Layer: 0
-  m_Name: Cube (1)
-  m_TagString: Untagged
+  m_Name: Crouch Test
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -774,7 +805,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 534446997}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 3.5, y: 1.55, z: -1.5}
+  m_LocalPosition: {x: 3.5, y: 1.35, z: -1.5}
   m_LocalScale: {x: 5, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 1957861944}
@@ -944,7 +975,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 771832859}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c3e559bbb9dc954eb953ee5f9b056f8, type: 3}
   m_Name: 
@@ -1005,7 +1036,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 771832859}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 26c3527e6709a78459b27c6441e7eb3c, type: 3}
   m_Name: 
@@ -1286,6 +1317,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   enemyDamage: 25
+  xpReward: 75
+  player: {fileID: 1318352761}
 --- !u!1 &1318352756
 GameObject:
   m_ObjectHideFlags: 0
@@ -1611,6 +1644,11 @@ Prefab:
       propertyPath: cam
       value: 
       objectReference: {fileID: 241120264}
+    - target: {fileID: 114706437498419912, guid: 950774b7a958e3f45b3a5cbe312b1b09,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 950774b7a958e3f45b3a5cbe312b1b09, type: 2}
   m_IsPrefabParent: 0
@@ -2473,7 +2511,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -883534836
+  randomSeed: -1999520389
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -5986,3 +6024,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   enemyDamage: 25
+  xpReward: 75
+  player: {fileID: 1318352761}

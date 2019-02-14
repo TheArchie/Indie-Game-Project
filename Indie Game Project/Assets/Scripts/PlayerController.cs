@@ -9,6 +9,10 @@ public class PlayerController : MonoBehaviour {
     public float jumpForce = 40.0f;
     public bool isCrouching;
 
+    //Player Crouch Vars
+    private float crouchHeight = 0.1f;
+    private float standHeight = 1.8f;
+
     //Mouse Look Variables
     public float Ysensitivity = 1f;
     public float Xsensitivity = 1f;
@@ -126,21 +130,27 @@ public class PlayerController : MonoBehaviour {
 
     void Crouch()
     {
-        if(Input.GetButtonDown("Crouch"))
+        Debug.DrawRay(transform.position, Vector3.up * 1f, Color.red);
+
+        if (Input.GetButtonDown("Crouch") && !isCrouching) //If the crouch button is pressed and the player is not coruching then crouch
         {
             isCrouching = true;
-            capCollider.height = 0.1f;
+            capCollider.height = crouchHeight;
             playerSpeed = 1f;
             headbob.bobbingAmount = 0.01f;
             headbob.bobbingSpeed = 0.05f;
         }
-        else if(Input.GetButtonUp("Crouch"))
+        else if(Input.GetButtonDown("Crouch") && isCrouching) //if the button is pressed and the player is crouching then stand
         {
-            isCrouching = false;
-            capCollider.height = 1.8f;
-            playerSpeed = 3.5f;
-            headbob.bobbingAmount = 0.05f;
-            headbob.bobbingSpeed = 0.18f;
+            var cantStand = Physics.Raycast(transform.position, Vector3.up, 1f);
+            if(!cantStand)
+            {
+                isCrouching = false;
+                capCollider.height = standHeight;
+                playerSpeed = 3.5f;
+                headbob.bobbingAmount = 0.05f;
+                headbob.bobbingSpeed = 0.18f;
+            }
         }
 
     }

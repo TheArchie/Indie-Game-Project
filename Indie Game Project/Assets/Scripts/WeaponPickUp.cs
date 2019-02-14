@@ -7,6 +7,7 @@ public class WeaponPickUp : MonoBehaviour {
     public GameObject hand;
     public GameObject obj;
     public Collider boxCollider;
+
     public Weapon weaponScript;
 
     public SwitchingWeapons weaponSwitch;
@@ -22,7 +23,7 @@ public class WeaponPickUp : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        weaponScript = GetComponent<Weapon>();
+       // weaponScript = GetComponent<Weapon>();
         weaponScript.enabled = false;
         weaponSwitch.GetComponent<SwitchingWeapons>();
         weaponEquipped = false;

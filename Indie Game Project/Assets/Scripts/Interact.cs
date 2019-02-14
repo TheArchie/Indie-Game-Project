@@ -49,6 +49,7 @@ public class Interact : MonoBehaviour {
             gameObject.transform.parent = null;
             GetComponent<Rigidbody>().useGravity = true;
             GetComponent<BoxCollider>().enabled = true;
+            isHolding = false;
         }
     }
 

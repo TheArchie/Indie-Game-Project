@@ -8,12 +8,16 @@ public class Target : MonoBehaviour {
 
     public float enemyDamage = 25f;
 
+    public float xpReward = 75f;
+
+    [SerializeField]
     private PlayerAttributes player;
 
     // Use this for initialization
     void Start()
     {
-        player = GetComponent<PlayerAttributes>();
+        //player = GetComponent<PlayerAttributes>();
+        player.GetComponent<PlayerAttributes>();
     }
 
     // Update is called once per frame
@@ -27,6 +31,7 @@ public class Target : MonoBehaviour {
         health -= amountofDamage;
         if (health <= 0)
         {
+            player.playerAtts.currentXp += xpReward;
             Death();
         }
     }

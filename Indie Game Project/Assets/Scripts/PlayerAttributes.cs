@@ -35,6 +35,8 @@ public class PlayerAttributes : MonoBehaviour {
 
         public int abilityPoints;
         public int skillPoints;
+
+
     }
 
     public PlayerInformation playerInfo = new PlayerInformation();
@@ -52,14 +54,14 @@ public class PlayerAttributes : MonoBehaviour {
         playerAtts.xpNextLevel = 250f;
         playerAtts.abilityPoints = 0;
         playerAtts.skillPoints = 0;
-	}
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
         Experience();
 
-        if(Input.GetKeyDown(KeyCode.E))
+        if(Input.GetKeyDown(KeyCode.Keypad1))
         {
             playerAtts.currentXp += 50;
         }
@@ -113,7 +115,7 @@ public class PlayerAttributes : MonoBehaviour {
     public void LevelUp()
     {
         playerAtts.playerLevel += 1;
-        playerAtts.currentXp = 0;
+        playerAtts.currentXp = playerAtts.currentXp - playerAtts.xpNextLevel;
         playerAtts.abilityPoints += 1;
         playerAtts.skillPoints += 15;
 
@@ -130,7 +132,7 @@ public class PlayerAttributes : MonoBehaviour {
 
     public void IncreaseHealth()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if(Input.GetKeyDown(KeyCode.Keypad2))
         {
             if(playerAtts.abilityPoints >= 1)
             {
