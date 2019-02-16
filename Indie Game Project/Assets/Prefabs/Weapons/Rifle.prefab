@@ -635,9 +635,7 @@ MonoBehaviour:
   weaponScript: {fileID: 114818726962089994}
   weaponSwitch: {fileID: 0}
   currentWeapon: 
-  rifle: {fileID: 0}
-  rifleEquipped: 0
-  pistolEquipped: 0
+  weaponEquipped: 0
   xPos: 0.23
   yPos: -0.22
   zPos: 0.5
@@ -652,12 +650,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c74601adf88462143844d3c646586cbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDamage: 30
+  weaponDamage: 0
+  weaponBaseDamage: 35
   maxAmmo: 60
   magazineAmmo: 20
   currentAmmo: 0
   fireRate: 10
-  weaponSpread: 1
   weaponRecoil: 0.05
   reloadTime: 1.5
   cam: {fileID: 0}
@@ -667,6 +665,7 @@ MonoBehaviour:
     type: 2}
   bulletDecal: {fileID: 1476870098304274, guid: 12a203af241627045962e95044620170,
     type: 2}
+  playerAttributes: {fileID: 0}
 --- !u!198 &198962141389328802
 ParticleSystem:
   m_ObjectHideFlags: 1

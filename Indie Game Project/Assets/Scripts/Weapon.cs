@@ -6,18 +6,19 @@ public class Weapon : MonoBehaviour {
 
     private int currentBulletCount;
 
-    public float weaponDamage = 30f; //Amount of damage the weapon does
+    [SerializeField]
+    private float weaponDamage; //Amount of damage the weapon does
+    public float weaponBaseDamage;
     public int maxAmmo = 60; //Maximum ammo of the gun
     public int magazineAmmo = 20; //Maximum ammo of the magazine
     [SerializeField]
     private int currentAmmo; //the guns current ammo
     public float fireRate = 10f; //firerate of the gun
-    public float weaponSpread = 1f; //spread of the weapon
     public float weaponRecoil = 0.05f; //recoil of the weapon
     public float reloadTime = 1.5f; //time it takes to reload
     private bool isReloading = false; //is the gun reloading 
 
-    private float fireTime = 0f; //
+    private float fireTime = 0f; //How quickly the gun can be fired
 
     public Camera cam; //camera variable
 
@@ -27,10 +28,13 @@ public class Weapon : MonoBehaviour {
     public GameObject impactEffect; //Impact effect Partical System
     public GameObject bulletDecal; //bullet holes variable
 
+    public PlayerAttributes playerAttributes;
+
     //When the scene starts make current ammo equal to the magazine ammo
     void Start()
     {
         currentAmmo = magazineAmmo;
+        playerAttributes.GetComponent<PlayerAttributes>();
     }
 
     //When the scene enables, set the reload bool to false
@@ -71,6 +75,13 @@ public class Weapon : MonoBehaviour {
             currentBulletCount = 0;
 
         ManualReload();
+
+        CalculateWeaponDamage();
+
+        if(Input.GetKeyDown(KeyCode.O))
+        {
+            Debug.Log("Weapon Damage is " + weaponDamage);
+        }
     }
 
     IEnumerator Reload()
@@ -136,5 +147,12 @@ public class Weapon : MonoBehaviour {
         {
             StartCoroutine(Reload());
         }
+    }
+
+    void CalculateWeaponDamage()
+    {
+        var calculation = playerAttributes.playerSkills.currentRifles * 0.5f + 50;
+        var calculation2 = calculation / 100;
+        weaponDamage = Mathf.Round(weaponBaseDamage * calculation2);
     }
 }

@@ -35,12 +35,36 @@ public class PlayerAttributes : MonoBehaviour {
 
         public int abilityPoints;
         public int skillPoints;
+    }
 
+    [System.Serializable]
+    public class PlayerSkills
+    {
+        public float maxRifles = 100f;
+        public float currentRifles = 15f;
 
+        public float maxbigGuns = 100f;
+        public float currentbigGuns = 15f;
+
+        public float maxPistols = 100f;
+        public float currentPistols = 15f;
+
+        public float maxMelee = 100f;
+        public float currentMelee = 15f;
+
+        public float maxMediicne = 100f;
+        public float currentMediicne = 15f;
+
+        public float maxScience = 100f;
+        public float currentScience = 15f;
+
+        public float maxSpeech = 100f;
+        public float currentSpeech = 15f;
     }
 
     public PlayerInformation playerInfo = new PlayerInformation();
     public PlayerLevels playerAtts = new PlayerLevels();
+    public PlayerSkills playerSkills = new PlayerSkills();
 
 
 	// Use this for initialization
@@ -64,10 +88,13 @@ public class PlayerAttributes : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.Keypad1))
         {
             playerAtts.currentXp += 50;
+            playerSkills.currentRifles += 10;
+            playerInfo.currentHealth += 10;
+            playerSkills.currentMediicne += 10;
         }
 
         IncreaseHealth();
-		
+        SetAttributes();
 	}
 
     public void DamagePlayer(float damageAmount)
@@ -90,6 +117,49 @@ public class PlayerAttributes : MonoBehaviour {
         }
     }
 
+    public void SetAttributes() //Set All the Player skills so that they can have a mximum value of 100 and can not progress further
+    {
+        if(playerInfo.currentHealth >= playerInfo.maxHealth)
+        {
+            playerInfo.currentHealth = playerInfo.maxHealth;
+        }
+
+        if (playerSkills.currentRifles >= playerSkills.maxRifles)
+        {
+            playerSkills.currentRifles = playerSkills.maxRifles;
+        }
+
+        if (playerSkills.currentPistols >= playerSkills.maxPistols)
+        {
+            playerSkills.currentPistols = playerSkills.maxPistols;
+        }
+
+        if (playerSkills.currentbigGuns >= playerSkills.maxbigGuns)
+        {
+            playerSkills.currentbigGuns = playerSkills.maxbigGuns;
+        }
+
+        if (playerSkills.currentMelee >= playerSkills.maxMelee)
+        {
+            playerSkills.currentMelee = playerSkills.maxMelee;
+        }
+
+        if (playerSkills.currentScience >= playerSkills.maxScience)
+        {
+            playerSkills.currentScience = playerSkills.maxScience;
+        }
+
+        if (playerSkills.currentMediicne >= playerSkills.maxMediicne)
+        {
+            playerSkills.currentMediicne = playerSkills.maxMediicne;
+        }
+
+        if (playerSkills.currentSpeech >= playerSkills.maxSpeech)
+        {
+            playerSkills.currentSpeech = playerSkills.maxSpeech;
+        }
+    }
+
     public void staminaLoss(float stamina)
     {
         playerInfo.currentStamina -= stamina;
@@ -105,9 +175,9 @@ public class PlayerAttributes : MonoBehaviour {
     {
         playerInfo.currentStamina += stamina;
         {
-            if(playerInfo.currentStamina >= 100)
+            if(playerInfo.currentStamina >= playerInfo.maxStamina)
             {
-                playerInfo.currentStamina = 100;
+                playerInfo.currentStamina = playerInfo.maxStamina;
             }
         }
     }
@@ -119,7 +189,7 @@ public class PlayerAttributes : MonoBehaviour {
         playerAtts.abilityPoints += 1;
         playerAtts.skillPoints += 15;
 
-        playerAtts.xpNextLevel = playerAtts.xpNextLevel * 1.5f;
+        playerAtts.xpNextLevel = Mathf.Round(playerAtts.xpNextLevel * 1.5f);
 
         Debug.Log("Levelled Up!");
     }
@@ -136,7 +206,8 @@ public class PlayerAttributes : MonoBehaviour {
         {
             if(playerAtts.abilityPoints >= 1)
             {
-                playerInfo.maxHealth = playerInfo.maxHealth + 10;
+                playerInfo.maxHealth = playerInfo.maxHealth += 10;
+                playerInfo.maxStamina = playerInfo.maxStamina += 10;
                 Debug.Log("Health Increased");
                 playerAtts.abilityPoints -= 1;
             }else if(playerAtts.abilityPoints <= 0)

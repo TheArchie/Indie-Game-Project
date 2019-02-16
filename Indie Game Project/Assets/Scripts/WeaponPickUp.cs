@@ -23,7 +23,7 @@ public class WeaponPickUp : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-       // weaponScript = GetComponent<Weapon>();
+        // weaponScript = GetComponent<Weapon>();
         weaponScript.enabled = false;
         weaponSwitch.GetComponent<SwitchingWeapons>();
         weaponEquipped = false;

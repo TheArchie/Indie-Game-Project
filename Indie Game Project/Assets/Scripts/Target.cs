@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Target : MonoBehaviour {
 
-    public float health = 100f;
+    public float enemyLevel;
+
+    public float health;
 
     public float enemyDamage = 25f;
 
@@ -18,12 +20,14 @@ public class Target : MonoBehaviour {
     {
         //player = GetComponent<PlayerAttributes>();
         player.GetComponent<PlayerAttributes>();
+
+        enemyLevel = Random.Range(1, 4);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        EnemyLevels();
     }
 
     public void Damage(float amountofDamage)
@@ -39,6 +43,18 @@ public class Target : MonoBehaviour {
     void Death()
     {
         Destroy(gameObject);
+    }
+
+    void EnemyLevels()
+    {
+        if(enemyLevel <= 2)
+        {
+            health = 100f;
+        }else if(enemyLevel >= 2 || enemyLevel <= 4 )
+        {
+            health = 120f;
+        }
+
     }
 
     void OnCollisionEnter(Collision collision)

@@ -708,7 +708,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1309c3b1e572b924fb8c4579b4c39ce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  enemyLevel: 0
+  health: 0
   enemyDamage: 25
   xpReward: 75
   player: {fileID: 1318352761}
@@ -1016,11 +1017,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponDamage: 12
+  weaponBaseDamage: 30
   maxAmmo: 100
   magazineAmmo: 12
   currentAmmo: 0
   fireRate: 2
-  weaponSpread: 1
   weaponRecoil: 0.02
   reloadTime: 1
   cam: {fileID: 241120264}
@@ -1030,6 +1031,7 @@ MonoBehaviour:
     type: 2}
   bulletDecal: {fileID: 1476870098304274, guid: 12a203af241627045962e95044620170,
     type: 2}
+  playerAttributes: {fileID: 0}
 --- !u!114 &771832863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1315,10 +1317,110 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1309c3b1e572b924fb8c4579b4c39ce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  enemyLevel: 0
+  health: 0
   enemyDamage: 25
   xpReward: 75
   player: {fileID: 1318352761}
+--- !u!1 &1276183897
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1276183898}
+  - component: {fileID: 1276183902}
+  - component: {fileID: 1276183901}
+  - component: {fileID: 1276183900}
+  - component: {fileID: 1276183899}
+  m_Layer: 0
+  m_Name: Health Pack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1276183898
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1276183897}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.894, y: 0.387, z: 0}
+  m_LocalScale: {x: 0.25, y: 0.1, z: 0.5}
+  m_Children: []
+  m_Father: {fileID: 1957861944}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1276183899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1276183897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 489167ab2ad7b8d43aa5861fa30c9865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healingEffect: 0
+  healingAmount: 30
+  playerAttributes: {fileID: 1318352761}
+--- !u!23 &1276183900
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1276183897}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!65 &1276183901
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1276183897}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &1276183902
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1276183897}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1318352756
 GameObject:
   m_ObjectHideFlags: 0
@@ -1467,6 +1569,21 @@ MonoBehaviour:
     xpNextLevel: 0
     abilityPoints: 0
     skillPoints: 0
+  playerSkills:
+    maxRifles: 100
+    currentRifles: 15
+    maxbigGuns: 100
+    currentbigGuns: 15
+    maxPistols: 100
+    currentPistols: 15
+    maxMelee: 100
+    currentMelee: 15
+    maxMediicne: 100
+    currentMediicne: 15
+    maxScience: 100
+    currentScience: 15
+    maxSpeech: 100
+    currentSpeech: 15
 --- !u!114 &1318352762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1619,16 +1736,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 114706437498419912, guid: 950774b7a958e3f45b3a5cbe312b1b09,
-        type: 2}
-      propertyPath: hand
-      value: 
-      objectReference: {fileID: 219500570}
-    - target: {fileID: 114706437498419912, guid: 950774b7a958e3f45b3a5cbe312b1b09,
-        type: 2}
-      propertyPath: weaponSwitch
-      value: 
-      objectReference: {fileID: 219500572}
     - target: {fileID: 114818726962089994, guid: 950774b7a958e3f45b3a5cbe312b1b09,
         type: 2}
       propertyPath: cam
@@ -1639,16 +1746,21 @@ Prefab:
       propertyPath: animator
       value: 
       objectReference: {fileID: 219500573}
-    - target: {fileID: 114706437498419912, guid: 950774b7a958e3f45b3a5cbe312b1b09,
+    - target: {fileID: 114818726962089994, guid: 950774b7a958e3f45b3a5cbe312b1b09,
         type: 2}
-      propertyPath: cam
+      propertyPath: playerAttributes
       value: 
-      objectReference: {fileID: 241120264}
+      objectReference: {fileID: 1318352761}
     - target: {fileID: 114706437498419912, guid: 950774b7a958e3f45b3a5cbe312b1b09,
         type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: hand
+      value: 
+      objectReference: {fileID: 219500570}
+    - target: {fileID: 114706437498419912, guid: 950774b7a958e3f45b3a5cbe312b1b09,
+        type: 2}
+      propertyPath: weaponSwitch
+      value: 
+      objectReference: {fileID: 219500572}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 950774b7a958e3f45b3a5cbe312b1b09, type: 2}
   m_IsPrefabParent: 0
@@ -5892,6 +6004,7 @@ Transform:
   - {fileID: 713726987}
   - {fileID: 534446998}
   - {fileID: 1734044726}
+  - {fileID: 1276183898}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6022,7 +6135,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1309c3b1e572b924fb8c4579b4c39ce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  enemyLevel: 0
+  health: 0
   enemyDamage: 25
   xpReward: 75
   player: {fileID: 1318352761}
