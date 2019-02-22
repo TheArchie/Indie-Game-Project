@@ -7,7 +7,8 @@ public class WeaponPickUp2 : MonoBehaviour {
     public GameObject hand;
     public GameObject obj;
     public Collider boxCollider;
-    public Weapon weaponScript;
+
+    public Pistol weaponScript;
 
     public SwitchingWeapons weaponSwitch;
 
@@ -22,7 +23,7 @@ public class WeaponPickUp2 : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        weaponScript = GetComponent<Weapon>();
+        // weaponScript = GetComponent<Weapon>();
         weaponScript.enabled = false;
         weaponSwitch.GetComponent<SwitchingWeapons>();
         weaponEquipped = false;
@@ -56,7 +57,6 @@ public class WeaponPickUp2 : MonoBehaviour {
         if (Input.GetButton("Interact"))
         {
             obj.transform.SetParent(hand.transform, false);
-            obj.SetActive(false);
             transform.localPosition = new Vector3(xPos, yPos, zPos);
             weaponScript.enabled = true;
             GetComponent<BoxCollider>().enabled = false;

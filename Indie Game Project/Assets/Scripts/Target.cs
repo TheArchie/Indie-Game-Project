@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class Target : MonoBehaviour {
 
+    public enum EnemyClass
+    {
+        verySmall, Small, Medium, Big, veryBig
+    }
+
+    public EnemyClass enemyClasses;
+
     public float enemyLevel;
-
     public float health;
-
     public float enemyDamage = 25f;
-
     public float xpReward = 75f;
 
     [SerializeField]

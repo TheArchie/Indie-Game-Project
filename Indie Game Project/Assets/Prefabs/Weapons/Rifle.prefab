@@ -657,6 +657,7 @@ MonoBehaviour:
   currentAmmo: 0
   fireRate: 10
   weaponRecoil: 0.05
+  recoilAmount: 0
   reloadTime: 1.5
   cam: {fileID: 0}
   animator: {fileID: 0}
@@ -665,6 +666,7 @@ MonoBehaviour:
     type: 2}
   bulletDecal: {fileID: 1476870098304274, guid: 12a203af241627045962e95044620170,
     type: 2}
+  weapon: {fileID: 1717701293756782}
   playerAttributes: {fileID: 0}
 --- !u!198 &198962141389328802
 ParticleSystem:

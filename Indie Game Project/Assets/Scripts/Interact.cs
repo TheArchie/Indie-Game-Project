@@ -7,6 +7,9 @@ public class Interact : MonoBehaviour {
     public Transform hand2;
     public bool isHolding;
 
+    public float distance = 5f;
+    public Camera cam;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -35,7 +38,8 @@ public class Interact : MonoBehaviour {
         }
     }*/
 
-    void OnMouseOver()
+
+    /*void OnMouseOver()
     {
         if(Input.GetButton("Interact"))
         {
@@ -51,7 +55,7 @@ public class Interact : MonoBehaviour {
             GetComponent<BoxCollider>().enabled = true;
             isHolding = false;
         }
-    }
+    }*/
 
     /*void OnMouseExit()
     {

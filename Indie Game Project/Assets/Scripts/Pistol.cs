@@ -2,21 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour {
+public class Pistol : MonoBehaviour {
 
     private int currentBulletCount;
 
     [SerializeField]
     private float weaponDamage; //Amount of damage the weapon does
     public float weaponBaseDamage;
-    public int maxAmmo = 60; //Maximum ammo of the gun
-    public int magazineAmmo = 20; //Maximum ammo of the magazine
+    public int pistolMaxAmmo = 120; //Maximum ammo of the gun
+    public int pistolMagazineAmmo = 12; //Maximum ammo of the magazine
     [SerializeField]
-    private int currentAmmo; //the guns current ammo
-    public float fireRate = 10f; //firerate of the gun
-    public float weaponRecoil = 0.05f; //recoil of the weapon
-    public float recoilAmount = 0f;
-    public float reloadTime = 1.5f; //time it takes to reload
+    private int pistolCurrentAmmo; //the guns current ammo
+    public float fireRate = 3f; //firerate of the gun
+    public float weaponRecoil = 0.02f; //recoil of the weapon
+    public float reloadTime = 1f; //time it takes to reload
     private bool isReloading = false; //is the gun reloading 
 
     private float fireTime = 0f; //How quickly the gun can be fired
@@ -31,15 +30,11 @@ public class Weapon : MonoBehaviour {
 
     public PlayerAttributes playerAttributes;
 
-    [SerializeField]
-    private Animator anim;
-
     //When the scene starts make current ammo equal to the magazine ammo
     void Start()
     {
-        currentAmmo = magazineAmmo;
+        pistolCurrentAmmo = pistolMagazineAmmo;
         playerAttributes.GetComponent<PlayerAttributes>();
-        anim = GetComponent<Animator>();
     }
 
     //When the scene enables, set the reload bool to false
@@ -54,14 +49,14 @@ public class Weapon : MonoBehaviour {
         if (isReloading)
             return;
 
-        if (currentAmmo <= 0 && maxAmmo >= 1)
+        if (pistolCurrentAmmo <= 0 && pistolMaxAmmo >= 1)
         {
             StartCoroutine(Reload());
             // When reloading, we reset the current bullet count
             currentBulletCount = 0;
             return;
         }
-        else if (currentAmmo <= 0 && maxAmmo <= 0)
+        else if (pistolCurrentAmmo <= 0 && pistolMaxAmmo <= 0)
         {
             currentBulletCount = 0;
             return;
@@ -83,7 +78,7 @@ public class Weapon : MonoBehaviour {
 
         CalculateWeaponDamage();
 
-        if(Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKeyDown(KeyCode.O))
         {
             Debug.Log("Weapon Damage is " + weaponDamage);
         }
@@ -99,10 +94,10 @@ public class Weapon : MonoBehaviour {
         animator.SetBool("isReloading", false);
         yield return new WaitForSeconds(.25f);
 
-        int bulletstoload = magazineAmmo - currentAmmo;
-        int bulletoremove = (maxAmmo >= bulletstoload) ? bulletstoload : maxAmmo;
-        maxAmmo -= bulletoremove;
-        currentAmmo += bulletoremove;
+        int bulletstoload = pistolMagazineAmmo - pistolCurrentAmmo;
+        int bulletoremove = (pistolMaxAmmo >= bulletstoload) ? bulletstoload : pistolMaxAmmo;
+        pistolMaxAmmo -= bulletoremove;
+        pistolCurrentAmmo += bulletoremove;
 
         isReloading = false;
     }
@@ -117,12 +112,12 @@ public class Weapon : MonoBehaviour {
     void Shoot()
     {
         muzzleFlash.Play();
-        currentAmmo--;
+        pistolCurrentAmmo--;
         RaycastHit hitInfo;
         if (Physics.Raycast(cam.transform.position, RandomizeSpray(cam.transform.forward), out hitInfo))
         {
             Debug.Log(hitInfo.transform.name);
-            Debug.Log(currentAmmo);
+            Debug.Log(pistolCurrentAmmo);
 
             Target target = hitInfo.transform.GetComponent<Target>();
             if (target != null)
@@ -142,13 +137,13 @@ public class Weapon : MonoBehaviour {
         var decal = Instantiate(bulletDecal);
         decal.transform.position = hitInfo.point;
         decal.transform.forward = hitInfo.normal * -1f;
-        Destroy(decal, 2f);
+        Destroy(decal, 5f);
         decal.transform.parent = hitInfo.transform;
     }
 
     void ManualReload()
     {
-        if(Input.GetButtonDown("Reload"))
+        if (Input.GetButtonDown("Reload"))
         {
             StartCoroutine(Reload());
         }

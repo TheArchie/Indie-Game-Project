@@ -13,7 +13,10 @@ public class HealingTest : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        playerAttributes.GetComponent<PlayerAttributes>();		
+        GameObject player = GameObject.Find("Player");
+
+        playerAttributes = GetComponent<PlayerAttributes>();
+        playerAttributes = GameObject.Find("Player").GetComponent<PlayerAttributes>();
 	}
 	
 	// Update is called once per frame
@@ -22,17 +25,24 @@ public class HealingTest : MonoBehaviour {
         CalculateHealingAmount();
 	}
 
-    private void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter(Collision collision)
     {
         Destroy(gameObject);
         playerAttributes.playerInfo.currentHealth += healingEffect;
         Debug.Log(healingEffect + " was Just Added to Player Health");
-    }
+    }*/
 
     void CalculateHealingAmount()
     {
         var calculation = playerAttributes.playerSkills.currentMediicne / 50;
         var calculation2 = calculation + 1;
         healingEffect = Mathf.Round(healingAmount * calculation2);
+    }
+
+    public void Healing()
+    {
+        playerAttributes.playerInfo.currentHealth += healingEffect;
+        Debug.Log(healingEffect + " was Just Added to Player Health");
+        //Destroy(gameObject);
     }
 }
