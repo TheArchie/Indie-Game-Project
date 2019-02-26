@@ -13,8 +13,10 @@ public class Target : MonoBehaviour {
 
     public float enemyLevel;
     public float health;
+    public int endurance;
     public float enemyDamage = 25f;
-    public float xpReward = 75f;
+    public float xpReward;
+    public bool elite; 
 
     [SerializeField]
     private PlayerAttributes player;
@@ -26,12 +28,14 @@ public class Target : MonoBehaviour {
         player.GetComponent<PlayerAttributes>();
 
         enemyLevel = Random.Range(1, 4);
+        SettingVariables();
+        EnemyHealth();
     }
 
     // Update is called once per frame
     void Update()
     {
-        EnemyLevels();
+
     }
 
     public void Damage(float amountofDamage)
@@ -49,16 +53,15 @@ public class Target : MonoBehaviour {
         Destroy(gameObject);
     }
 
-    void EnemyLevels()
+    void EnemyHealth()
     {
-        if(enemyLevel <= 2)
+        var calculation = (endurance * 20) + (enemyLevel * 10);
+        var calculation2 = 90 + calculation;
+        health = calculation2;
+        if(elite == true)
         {
-            health = 100f;
-        }else if(enemyLevel >= 2 || enemyLevel <= 4 )
-        {
-            health = 120f;
+            health = calculation2 * 2;
         }
-
     }
 
     void OnCollisionEnter(Collision collision)
@@ -69,5 +72,44 @@ public class Target : MonoBehaviour {
            player.DamagePlayer(enemyDamage);
             Debug.Log("Player Health is " + player.playerInfo.currentHealth);
         } 
+    }
+
+    void SettingVariables()
+    {
+        if(enemyClasses == EnemyClass.verySmall)
+        {
+            endurance = Random.Range(1, 3);
+            xpReward = 10f;
+        }
+
+        if (enemyClasses == EnemyClass.Small)
+        {
+            endurance = Random.Range(3, 5);
+            xpReward = 20f;
+        }
+
+        if (enemyClasses == EnemyClass.Medium)
+        {
+            endurance = Random.Range(5, 7);
+            xpReward = 30f;
+        }
+
+        if (enemyClasses == EnemyClass.Big)
+        {
+            endurance = Random.Range(7, 9);
+            xpReward = 40f;
+        }
+
+        if (enemyClasses == EnemyClass.veryBig)
+        {
+            endurance = Random.Range(9, 11);
+            xpReward = 50f;
+        }
+
+        if(elite == true)
+        {
+            xpReward = xpReward * 10;
+            enemyDamage = enemyDamage * 2;
+        }
     }
 }

@@ -523,10 +523,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1309c3b1e572b924fb8c4579b4c39ce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyClasses: 0
   enemyLevel: 0
   health: 0
+  endurance: 0
   enemyDamage: 25
   xpReward: 75
+  elite: 0
   player: {fileID: 1318352761}
 --- !u!1 &492993287
 GameObject:
@@ -1122,10 +1125,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1309c3b1e572b924fb8c4579b4c39ce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyClasses: 0
   enemyLevel: 0
   health: 0
+  endurance: 0
   enemyDamage: 25
   xpReward: 75
+  elite: 0
   player: {fileID: 1318352761}
 --- !u!114 &1318352761 stripped
 MonoBehaviour:
@@ -1619,6 +1625,11 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 1318352761}
+    - target: {fileID: 114493402647260890, guid: 11cf028e6670b5340aec5de348630697,
+        type: 2}
+      propertyPath: enemyClasses
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 11cf028e6670b5340aec5de348630697, type: 2}
   m_IsPrefabParent: 0
@@ -5760,8 +5771,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1309c3b1e572b924fb8c4579b4c39ce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyClasses: 0
   enemyLevel: 0
   health: 0
+  endurance: 0
   enemyDamage: 25
   xpReward: 75
+  elite: 0
   player: {fileID: 1318352761}
