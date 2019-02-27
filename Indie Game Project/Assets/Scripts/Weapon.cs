@@ -11,8 +11,7 @@ public class Weapon : MonoBehaviour {
     public float weaponBaseDamage;
     public int maxAmmo = 60; //Maximum ammo of the gun
     public int magazineAmmo = 20; //Maximum ammo of the magazine
-    [SerializeField]
-    private int currentAmmo; //the guns current ammo
+    public int currentAmmo; //the guns current ammo
     public float fireRate = 10f; //firerate of the gun
     public float weaponRecoil = 0.05f; //recoil of the weapon
     public float recoilAmount = 0f;

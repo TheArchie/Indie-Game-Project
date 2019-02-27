@@ -7,6 +7,8 @@ public class GameController : MonoBehaviour {
     public GameObject hand;
     public Camera deathCam;
 
+    public bool cursorLock;
+
 
     //public PlayerAttributes playeratts;
 
@@ -17,8 +19,7 @@ public class GameController : MonoBehaviour {
     {
         //hand.SetActive(false);
         deathCam.enabled = false;
- 
-
+        LockMouse();
         //playeratts = GetComponent<PlayerAttributes>();
     }
 	
@@ -27,4 +28,19 @@ public class GameController : MonoBehaviour {
     {
 		
 	}
+
+    void LockMouse()
+    {
+        if (cursorLock == true)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else if (cursorLock == false)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+
+    }
 }

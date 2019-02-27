@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour {
     {
         rgb = GetComponent<Rigidbody>();
         capCollider = GetComponent<CapsuleCollider>();
-        LockMouse();
+        //LockMouse();
         headbob.GetComponent<HeadBobbing>();
         playerInfo = GetComponent<PlayerAttributes>();
         increaseStamina = true;
@@ -166,7 +166,7 @@ public class PlayerController : MonoBehaviour {
         cam.localRotation = fpsCam;
     }
 
-    void LockMouse()
+    /*void LockMouse()
     {
         if(cursorLock == true)
         {
@@ -178,7 +178,7 @@ public class PlayerController : MonoBehaviour {
             Cursor.lockState = CursorLockMode.None;
         }
        
-    }
+    }*/
 
     IEnumerator UpdateStamina()
     {
