@@ -88,7 +88,7 @@ public class PlayerAttributes : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.Keypad1))
         {
             playerAtts.currentXp += 50;
-            playerSkills.currentRifles += 10;
+            //playerSkills.currentRifles += 10;
             playerInfo.currentHealth += 10;
             playerSkills.currentMediicne += 10;
         }
@@ -215,6 +215,69 @@ public class PlayerAttributes : MonoBehaviour {
                 Debug.Log("Not Enough Ability Points");
                 return;
             }
+        }
+    }
+
+    public void IncreaseLightWeaponStat()
+    {
+        if(playerAtts.skillPoints >= 1)
+        {
+            playerSkills.currentRifles++;
+            playerAtts.skillPoints--;
+        }
+    }
+
+    public void IncreaseHeavyWeaponStat()
+    {
+        if (playerAtts.skillPoints >= 1)
+        {
+            playerSkills.currentbigGuns++;
+            playerAtts.skillPoints--;
+        }
+    }
+
+    public void IncreaseHandgunsStat()
+    {
+        if (playerAtts.skillPoints >= 1)
+        {
+            playerSkills.currentPistols++;
+            playerAtts.skillPoints--;
+        }
+    }
+
+    public void IncreaseMeleeStat()
+    {
+        if (playerAtts.skillPoints >= 1)
+        {
+            playerSkills.currentMelee++;
+            playerAtts.skillPoints--;
+        }
+    }
+
+    public void IncreaseMedicineStat()
+    {
+        if (playerAtts.skillPoints >= 1)
+        {
+            playerSkills.currentMediicne++;
+            playerAtts.skillPoints--;
+        }
+    }
+
+    public void IncreaseScienceStat()
+    {
+        if (playerAtts.skillPoints >= 1)
+        {
+            playerSkills.currentScience++;
+            playerAtts.skillPoints--;
+        }
+    }
+
+    public void IncreaseSpeechStat()
+    {
+        if (playerAtts.skillPoints >= 1)
+        {
+            playerSkills.currentSpeech++;
+            playerAtts.skillPoints--;
         }
     }
 }

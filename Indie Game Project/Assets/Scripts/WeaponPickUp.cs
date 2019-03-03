@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WeaponPickUp : MonoBehaviour {
 
+    public GameObject weapon;
+
     public GameObject hand;
     public GameObject obj;
     public Collider boxCollider;

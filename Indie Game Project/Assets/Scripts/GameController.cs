@@ -29,7 +29,7 @@ public class GameController : MonoBehaviour {
 		
 	}
 
-    void LockMouse()
+    public void LockMouse()
     {
         if (cursorLock == true)
         {
