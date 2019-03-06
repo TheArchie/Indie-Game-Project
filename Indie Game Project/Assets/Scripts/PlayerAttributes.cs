@@ -62,10 +62,26 @@ public class PlayerAttributes : MonoBehaviour {
         public float currentSpeech = 15f;
     }
 
+    [System.Serializable]
+    public class PointsAdded
+    {
+        public int lightWeaponsPointsAdded;
+        public int heavyWeaponsPointsAdded;
+        public int handgunsPointsAdded;
+        public int meleePointsAdded;
+        public int medicinePointsAdded;
+        public int sciencePointsAdded;
+        public int speechAdded;
+    }
+
     public PlayerInformation playerInfo = new PlayerInformation();
     public PlayerLevels playerAtts = new PlayerLevels();
     public PlayerSkills playerSkills = new PlayerSkills();
+    [HideInInspector]
+    public PointsAdded pointsAdded = new PointsAdded();
 
+    [SerializeField]
+    private UI UIController;
 
 	// Use this for initialization
 	void Start ()
@@ -89,11 +105,7 @@ public class PlayerAttributes : MonoBehaviour {
         {
             playerAtts.currentXp += 50;
             //playerSkills.currentRifles += 10;
-            playerInfo.currentHealth += 10;
-            playerSkills.currentMediicne += 10;
         }
-
-        IncreaseHealth();
         SetAttributes();
 	}
 
@@ -202,20 +214,47 @@ public class PlayerAttributes : MonoBehaviour {
 
     public void IncreaseHealth()
     {
-        if(Input.GetKeyDown(KeyCode.Keypad2))
-        {
             if(playerAtts.abilityPoints >= 1)
             {
                 playerInfo.maxHealth = playerInfo.maxHealth += 10;
-                playerInfo.maxStamina = playerInfo.maxStamina += 10;
                 Debug.Log("Health Increased");
                 playerAtts.abilityPoints -= 1;
+                UIController.healthDecrease.interactable = true;
             }else if(playerAtts.abilityPoints <= 0)
             {
                 Debug.Log("Not Enough Ability Points");
                 return;
-            }
+            }        
+    }
+
+    public void DecreaseHealth()
+    {
+        playerInfo.maxHealth = playerInfo.maxHealth -= 10;
+        playerAtts.abilityPoints += 1;
+        UIController.healthDecrease.interactable = false;
+    }
+
+    public void IncreaseStamina()
+    {
+        if (playerAtts.abilityPoints >= 1)
+        {
+            playerInfo.maxStamina = playerInfo.maxStamina += 10;
+            Debug.Log("Stamina Increased");
+            playerAtts.abilityPoints -= 1;
+            UIController.staminaDecrease.interactable = true;
         }
+        else if (playerAtts.abilityPoints <= 0)
+        {
+            Debug.Log("Not Enough Ability Points");
+            return;
+        }
+    }
+
+    public void DecreaseStamina()
+    {
+        playerInfo.maxHealth = playerInfo.maxStamina -= 10;
+        playerAtts.abilityPoints += 1;
+        UIController.staminaDecrease.interactable = false;
     }
 
     public void IncreaseLightWeaponStat()
@@ -224,6 +263,22 @@ public class PlayerAttributes : MonoBehaviour {
         {
             playerSkills.currentRifles++;
             playerAtts.skillPoints--;
+            UIController.lightweaponDecrease.interactable = true;
+            pointsAdded.lightWeaponsPointsAdded++;
+            Debug.Log("Light Weapons Points Added is " + pointsAdded.lightWeaponsPointsAdded);
+        }
+    }
+
+    public void DecreaseLightWeaponStat()
+    {
+        playerSkills.currentRifles--;
+        playerAtts.skillPoints++;
+        pointsAdded.lightWeaponsPointsAdded--;
+
+        if(pointsAdded.lightWeaponsPointsAdded <= 0)
+        {
+            UIController.lightweaponDecrease.interactable = false;
+            pointsAdded.lightWeaponsPointsAdded = 0;
         }
     }
 
@@ -233,6 +288,22 @@ public class PlayerAttributes : MonoBehaviour {
         {
             playerSkills.currentbigGuns++;
             playerAtts.skillPoints--;
+            UIController.heavyweaponDecrease.interactable = true;
+            pointsAdded.heavyWeaponsPointsAdded++;
+            Debug.Log("Heavy Weapons Points Added is " + pointsAdded.heavyWeaponsPointsAdded);
+        }
+    }
+
+    public void DecreaseHeavyWeaponStat()
+    {
+        playerSkills.currentbigGuns--;
+        playerAtts.skillPoints++;
+        pointsAdded.heavyWeaponsPointsAdded--;
+
+        if (pointsAdded.heavyWeaponsPointsAdded <= 0)
+        {
+            UIController.heavyweaponDecrease.interactable = false;
+            pointsAdded.heavyWeaponsPointsAdded = 0;
         }
     }
 
@@ -242,6 +313,22 @@ public class PlayerAttributes : MonoBehaviour {
         {
             playerSkills.currentPistols++;
             playerAtts.skillPoints--;
+            UIController.handgunDecrease.interactable = true;
+            pointsAdded.handgunsPointsAdded++;
+            Debug.Log("Handguns Points Added is " + pointsAdded.handgunsPointsAdded);
+        }
+    }
+
+    public void DecreaseHandgunStat()
+    {
+        playerSkills.currentPistols--;
+        playerAtts.skillPoints++;
+        pointsAdded.handgunsPointsAdded--;
+
+        if (pointsAdded.handgunsPointsAdded <= 0)
+        {
+            UIController.handgunDecrease.interactable = false;
+            pointsAdded.handgunsPointsAdded = 0;
         }
     }
 
@@ -251,6 +338,22 @@ public class PlayerAttributes : MonoBehaviour {
         {
             playerSkills.currentMelee++;
             playerAtts.skillPoints--;
+            UIController.meleeDecrease.interactable = true;
+            pointsAdded.meleePointsAdded++;
+            Debug.Log("Melee Points Added is " + pointsAdded.meleePointsAdded);
+        }
+    }
+
+    public void DecreaseMeleeStat()
+    {
+        playerSkills.currentMelee--;
+        playerAtts.skillPoints++;
+        pointsAdded.meleePointsAdded--;
+
+        if (pointsAdded.meleePointsAdded <= 0)
+        {
+            UIController.meleeDecrease.interactable = false;
+            pointsAdded.meleePointsAdded = 0;
         }
     }
 
@@ -260,6 +363,22 @@ public class PlayerAttributes : MonoBehaviour {
         {
             playerSkills.currentMediicne++;
             playerAtts.skillPoints--;
+            UIController.medicineDecrease.interactable = true;
+            pointsAdded.medicinePointsAdded++;
+            Debug.Log("Medicine Points Added is " + pointsAdded.medicinePointsAdded);
+        }
+    }
+
+    public void DecreaseMedicineStat()
+    {
+        playerSkills.currentMediicne--;
+        playerAtts.skillPoints++;
+        pointsAdded.medicinePointsAdded--;
+
+        if (pointsAdded.medicinePointsAdded <= 0)
+        {
+            UIController.medicineDecrease.interactable = false;
+            pointsAdded.medicinePointsAdded = 0;
         }
     }
 
@@ -269,6 +388,22 @@ public class PlayerAttributes : MonoBehaviour {
         {
             playerSkills.currentScience++;
             playerAtts.skillPoints--;
+            UIController.scienceDecrease.interactable = true;
+            pointsAdded.sciencePointsAdded++;
+            Debug.Log("Science Points Added is " + pointsAdded.sciencePointsAdded);
+        }
+    }
+
+    public void DecreaseSciecneStat()
+    {
+        playerSkills.currentScience--;
+        playerAtts.skillPoints++;
+        pointsAdded.sciencePointsAdded--;
+
+        if (pointsAdded.sciencePointsAdded <= 0)
+        {
+            UIController.scienceDecrease.interactable = false;
+            pointsAdded.sciencePointsAdded = 0;
         }
     }
 
@@ -278,6 +413,22 @@ public class PlayerAttributes : MonoBehaviour {
         {
             playerSkills.currentSpeech++;
             playerAtts.skillPoints--;
+            UIController.speechDecrease.interactable = true;
+            pointsAdded.speechAdded++;
+            Debug.Log("Speech Points Added is " + pointsAdded.speechAdded);
+        }
+    }
+
+    public void DecreaseSpeechStat()
+    {
+        playerSkills.currentSpeech--;
+        playerAtts.skillPoints++;
+        pointsAdded.speechAdded--;
+
+        if (pointsAdded.speechAdded <= 0)
+        {
+            UIController.speechDecrease.interactable = false;
+            pointsAdded.speechAdded = 0;
         }
     }
 }

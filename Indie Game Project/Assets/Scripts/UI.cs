@@ -25,19 +25,35 @@ public class UI : MonoBehaviour {
     public Canvas skills;
     public Canvas abilites;
 
+    public TextMeshProUGUI playerLevelText;
+    public TextMeshProUGUI playerLevelText2;
+    public TextMeshProUGUI xpText;
+    public TextMeshProUGUI xpText2;
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI maxhealthText;
     public TextMeshProUGUI staminaText;
     public TextMeshProUGUI maxstaminaText;
     public TextMeshProUGUI ammoText;
     public TextMeshProUGUI skillPointText;
-    public TextMeshProUGUI rifleText;
-    public TextMeshProUGUI biggunsText;
-    public TextMeshProUGUI pistolText;
+    public TextMeshProUGUI abilityPointsText;
+    public TextMeshProUGUI lightweaponsText;
+    public TextMeshProUGUI heavyWeaponsText;
+    public TextMeshProUGUI handgunsText;
     public TextMeshProUGUI meleeText;
     public TextMeshProUGUI medicineText;
     public TextMeshProUGUI scienceText;
     public TextMeshProUGUI speechText;
+    public TextMeshProUGUI warningText;
+
+    public Button healthDecrease;
+    public Button staminaDecrease;
+    public Button lightweaponDecrease;
+    public Button heavyweaponDecrease;
+    public Button handgunDecrease;
+    public Button meleeDecrease;
+    public Button medicineDecrease;
+    public Button scienceDecrease;
+    public Button speechDecrease;
 
     private bool inventoryShown;
 
@@ -53,9 +69,23 @@ public class UI : MonoBehaviour {
         abilites.enabled = false;
         inventoryShown = false;
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    private void OnEnable()
+    {
+        healthDecrease.interactable = false;
+        staminaDecrease.interactable = false;
+        lightweaponDecrease.interactable = false;
+        heavyweaponDecrease.interactable = false;
+        handgunDecrease.interactable = false;
+        meleeDecrease.interactable = false;
+        medicineDecrease.interactable = false;
+        scienceDecrease.interactable = false;
+        speechDecrease.interactable = false;
+        warningText.enabled = false;
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
         SettingTexts();
         Test();
@@ -83,13 +113,33 @@ public class UI : MonoBehaviour {
             PauseGame();
             //gameController.cursorLock = false;
 
-        }else if(Input.GetButtonDown("Inventory") && inventoryShown == true)
+        }else if(Input.GetButtonDown("Inventory") && inventoryShown == true && playerAttributes.playerAtts.skillPoints <= 0 && playerAttributes.playerAtts.abilityPoints <= 0)
         {
             skills.enabled = false;
             abilites.enabled = false;
             inventoryShown = false;
+            healthDecrease.interactable = false;
+            staminaDecrease.interactable = false;
+            lightweaponDecrease.interactable = false;
+            heavyweaponDecrease.interactable = false;
+            handgunDecrease.interactable = false;
+            meleeDecrease.interactable = false;
+            medicineDecrease.interactable = false;
+            scienceDecrease.interactable = false;
+            speechDecrease.interactable = false;
+            warningText.enabled = false;
+            playerAttributes.pointsAdded.lightWeaponsPointsAdded = 0;
+            playerAttributes.pointsAdded.heavyWeaponsPointsAdded = 0;
+            playerAttributes.pointsAdded.handgunsPointsAdded = 0;
+            playerAttributes.pointsAdded.meleePointsAdded = 0;
+            playerAttributes.pointsAdded.medicinePointsAdded = 0;
+            playerAttributes.pointsAdded.sciencePointsAdded = 0;
+            playerAttributes.pointsAdded.speechAdded = 0;
             UnPauseGame();
             //gameController.cursorLock = true;
+        }else if(Input.GetButtonDown("Inventory") && inventoryShown == true && playerAttributes.playerAtts.skillPoints >= 1 && playerAttributes.playerAtts.abilityPoints >= 1)
+        {
+            warningText.enabled = true;
         }
     }
 
@@ -133,14 +183,19 @@ public class UI : MonoBehaviour {
 
     void SettingTexts()
     {
+        playerLevelText.text = "Level: " + playerAttributes.playerAtts.playerLevel;
+        playerLevelText2.text = "Level: " + playerAttributes.playerAtts.playerLevel;
+        xpText.text = "Expereince: " + playerAttributes.playerAtts.currentXp + " / " + playerAttributes.playerAtts.xpNextLevel; 
+        xpText2.text = "Expereince: " + playerAttributes.playerAtts.currentXp + " / " + playerAttributes.playerAtts.xpNextLevel; 
         healthText.text = "HP: " + playerAttributes.playerInfo.currentHealth.ToString();
         maxhealthText.text = "Health: " + playerAttributes.playerInfo.maxHealth;
         staminaText.text = "Energy: " + playerAttributes.playerInfo.currentStamina.ToString();
         maxstaminaText.text = "Stamina: " + playerAttributes.playerInfo.maxStamina;
         skillPointText.text = "Skill Points: " + playerAttributes.playerAtts.skillPoints;
-        rifleText.text = "Rifles: " + playerAttributes.playerSkills.currentRifles;
-        biggunsText.text = "Big Guns: " + playerAttributes.playerSkills.currentbigGuns;
-        pistolText.text = "Pistols: " + playerAttributes.playerSkills.currentPistols;
+        abilityPointsText.text = "Ability Points: " + playerAttributes.playerAtts.abilityPoints;
+        lightweaponsText.text = "Light Weapons: " + playerAttributes.playerSkills.currentRifles;
+        heavyWeaponsText.text = "Heavy Weapons: " + playerAttributes.playerSkills.currentbigGuns;
+        handgunsText.text = "Handguns: " + playerAttributes.playerSkills.currentPistols;
         meleeText.text = "Melee: " + playerAttributes.playerSkills.currentMelee;
         medicineText.text = "Medicine: " + playerAttributes.playerSkills.currentMediicne;
         scienceText.text = "Science: " + playerAttributes.playerSkills.currentScience;
@@ -163,9 +218,15 @@ public class UI : MonoBehaviour {
         }*/
     }
 
-   public void ChangeToAbilities()
+    public void ChangeToAbilities()
     {
         skills.enabled = false;
         abilites.enabled = true;
+    }
+
+    public void ChangetoSkills()
+    {
+        skills.enabled = true;
+        abilites.enabled = false;
     }
 }
