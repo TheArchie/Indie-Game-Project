@@ -6003,6 +6003,11 @@ Prefab:
       propertyPath: weapon
       value: 
       objectReference: {fileID: 1620304616}
+    - target: {fileID: 114706437498419912, guid: 950774b7a958e3f45b3a5cbe312b1b09,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 950774b7a958e3f45b3a5cbe312b1b09, type: 2}
   m_IsPrefabParent: 0
@@ -6853,6 +6858,11 @@ CanvasRenderer:
 --- !u!1 &1620304616 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1717701293756782, guid: 950774b7a958e3f45b3a5cbe312b1b09,
+    type: 2}
+  m_PrefabInternal: {fileID: 1388548806}
+--- !u!65 &1620304618 stripped
+BoxCollider:
+  m_PrefabParentObject: {fileID: 65308646438436456, guid: 950774b7a958e3f45b3a5cbe312b1b09,
     type: 2}
   m_PrefabInternal: {fileID: 1388548806}
 --- !u!114 &1620304619 stripped
@@ -8051,6 +8061,26 @@ Prefab:
       propertyPath: UIController
       value: 
       objectReference: {fileID: 829412953}
+    - target: {fileID: 114913939348089858, guid: c6453f8e1f814744d8b94e5a6d1f9942,
+        type: 2}
+      propertyPath: hand
+      value: 
+      objectReference: {fileID: 219500570}
+    - target: {fileID: 114913939348089858, guid: c6453f8e1f814744d8b94e5a6d1f9942,
+        type: 2}
+      propertyPath: obj
+      value: 
+      objectReference: {fileID: 1620304616}
+    - target: {fileID: 114913939348089858, guid: c6453f8e1f814744d8b94e5a6d1f9942,
+        type: 2}
+      propertyPath: boxCollider
+      value: 
+      objectReference: {fileID: 1620304618}
+    - target: {fileID: 114913939348089858, guid: c6453f8e1f814744d8b94e5a6d1f9942,
+        type: 2}
+      propertyPath: weaponScript
+      value: 
+      objectReference: {fileID: 1620304619}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 2}
   m_IsPrefabParent: 0

@@ -72,11 +72,14 @@ public class Weapon : MonoBehaviour {
             Shoot();
             currentBulletCount++; //we add 1 to the current bullet count, which will increase the range for the spray
             Debug.Log("Gun Fired");
+            Debug.Log("Bullet Count is " + currentBulletCount);
         }
 
         //if the player stop clicking, we reset the current bullet count
         if (Input.GetButtonUp("Fire1"))
-            currentBulletCount = 0;
+        {
+            StartCoroutine(RecoilCount());
+        }
 
         ManualReload();
 
@@ -85,6 +88,16 @@ public class Weapon : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.O))
         {
             Debug.Log("Weapon Damage is " + weaponDamage);
+        }
+    }
+
+    IEnumerator RecoilCount()
+    {
+        yield return new WaitForSeconds(1f);
+        currentBulletCount--;
+        if(currentBulletCount <= 0)
+        {
+            currentBulletCount = 0;
         }
     }
 
