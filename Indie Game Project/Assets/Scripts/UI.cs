@@ -22,8 +22,11 @@ public class UI : MonoBehaviour {
     public Transform handgun;
     public Transform cam;
     
-    public Canvas skills;
-    public Canvas abilites;
+    public GameObject skills;
+    public GameObject abilites;
+    public GameObject questWindow;
+
+    public string enemyType;
 
     public TextMeshProUGUI playerLevelText;
     public TextMeshProUGUI playerLevelText2;
@@ -44,6 +47,7 @@ public class UI : MonoBehaviour {
     public TextMeshProUGUI scienceText;
     public TextMeshProUGUI speechText;
     public TextMeshProUGUI warningText;
+    public TextMeshProUGUI enemyText;
 
     public Button healthDecrease;
     public Button staminaDecrease;
@@ -56,6 +60,7 @@ public class UI : MonoBehaviour {
     public Button speechDecrease;
 
     private bool inventoryShown;
+    public bool questWindowShown;
 
     public TextMeshProUGUI pistolammoText;
 
@@ -65,9 +70,14 @@ public class UI : MonoBehaviour {
         //gameController = GetComponent<GameController>();
         //gameController = gameObject.AddComponent<GameController>();
 
-        skills.enabled = false;
-        abilites.enabled = false;
+        skills.SetActive(false);
+        abilites.SetActive(false);
+        questWindow.SetActive(false);
         inventoryShown = false;
+        questWindowShown = false;
+        enemyText.enabled = false;
+
+        enemyText.text = enemyType;
 	}
 
     private void OnEnable()
@@ -108,15 +118,15 @@ public class UI : MonoBehaviour {
     {
         if(Input.GetButtonDown("Inventory") && inventoryShown == false)
         {
-            skills.enabled = true;
+            skills.SetActive(true);
             inventoryShown = true;
             PauseGame();
             //gameController.cursorLock = false;
 
         }else if(Input.GetButtonDown("Inventory") && inventoryShown == true && playerAttributes.playerAtts.skillPoints <= 0 && playerAttributes.playerAtts.abilityPoints <= 0)
         {
-            skills.enabled = false;
-            abilites.enabled = false;
+            skills.SetActive(false);
+            abilites.SetActive(false);
             inventoryShown = false;
             healthDecrease.interactable = false;
             staminaDecrease.interactable = false;
@@ -143,7 +153,7 @@ public class UI : MonoBehaviour {
         }
     }
 
-    void PauseGame()
+    public void PauseGame()
     {
         Time.timeScale = 0;
         gameController.GetComponent<GameController>().cursorLock = false;
@@ -155,7 +165,7 @@ public class UI : MonoBehaviour {
         hand.GetComponent<SwitchingWeapons>().enabled = false;
     }
 
-    void UnPauseGame()
+    public void UnPauseGame()
     {
         Time.timeScale = 1;
         gameController.GetComponent<GameController>().cursorLock = true;
@@ -201,7 +211,7 @@ public class UI : MonoBehaviour {
         scienceText.text = "Science: " + playerAttributes.playerSkills.currentScience;
         speechText.text = "Speech: " + playerAttributes.playerSkills.currentSpeech;
 
-        if(rifle.GetComponent<WeaponPickUp>().weaponEquipped == true)
+        /*if(rifle.GetComponent<WeaponPickUp>().weaponEquipped == true)
         {
             ammoText.text = weapon.currentAmmo + " / " + weapon.maxAmmo;
         }else if(rifle.GetComponent<WeaponPickUp>().weaponEquipped == false)
@@ -209,7 +219,7 @@ public class UI : MonoBehaviour {
             ammoText.text = null;
         }
 
-        /*if(pistol.GetComponent<WeaponPickUp2>().weaponEquipped == true)
+        if(pistol.GetComponent<WeaponPickUp2>().weaponEquipped == true)
         {
             pistolammoText.text = pistol.pistolCurrentAmmo + " / " + pistol.pistolMaxAmmo;
         }else
@@ -220,13 +230,13 @@ public class UI : MonoBehaviour {
 
     public void ChangeToAbilities()
     {
-        skills.enabled = false;
-        abilites.enabled = true;
+        skills.SetActive(false);
+        abilites.SetActive(true);
     }
 
     public void ChangetoSkills()
     {
-        skills.enabled = true;
-        abilites.enabled = false;
+        skills.SetActive(true);
+        abilites.SetActive(false);
     }
 }

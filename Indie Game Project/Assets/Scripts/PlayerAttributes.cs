@@ -83,6 +83,8 @@ public class PlayerAttributes : MonoBehaviour {
     [SerializeField]
     private UI UIController;
 
+    public Mission mission;
+
 	// Use this for initialization
 	void Start ()
     {

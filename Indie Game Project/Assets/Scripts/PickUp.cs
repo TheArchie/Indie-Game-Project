@@ -14,6 +14,8 @@ public class PickUp : MonoBehaviour {
     private HealingTest healingTest;
     [SerializeField]
     private AmmoTest ammoTest;
+    [SerializeField]
+    private MissionGiver missionGiver;
 
 
 	// Use this for initialization
@@ -48,6 +50,7 @@ public class PickUp : MonoBehaviour {
         {
             Debug.Log(hitInfo.transform.name);
             PickupObject();
+            NPCInteraction();
         }
     }
 
@@ -69,8 +72,22 @@ public class PickUp : MonoBehaviour {
                 Debug.Log("This is an Ammo Box");
                 ammoTest.AddAmmo();
                 Destroy(hitInfo.transform.gameObject);
+            }          
+        }
+    }
+
+    void NPCInteraction()
+    {
+        if (Input.GetButtonDown("Interact") && missionGiver.missionWindowActive == false)
+        {
+            if (hitInfo.transform.gameObject.tag == "NPC")
+            {
+                Debug.Log("I'm an NPC");
+                missionGiver.ShowUI();
+            }else if(Input.GetButtonDown("Interact") && missionGiver.missionWindowActive == true)
+            {
+                missionGiver.HideUI();
             }
-            
         }
     }
 }

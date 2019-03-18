@@ -29,6 +29,7 @@ public class Weapon : MonoBehaviour {
     public GameObject bulletDecal; //bullet holes variable
 
     public PlayerAttributes playerAttributes;
+    public UI ui;
 
     [SerializeField]
     private Animator anim;
@@ -94,7 +95,8 @@ public class Weapon : MonoBehaviour {
     IEnumerator RecoilCount()
     {
         yield return new WaitForSeconds(1f);
-        currentBulletCount--;
+        //currentBulletCount--;
+        currentBulletCount = 0;
         if(currentBulletCount <= 0)
         {
             currentBulletCount = 0;

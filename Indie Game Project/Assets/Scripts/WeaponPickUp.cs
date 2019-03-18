@@ -10,13 +10,17 @@ public class WeaponPickUp : MonoBehaviour {
     public GameObject obj;
     public Collider boxCollider;
 
-    public Weapon weaponScript;
+    [SerializeField]
+    private Weapon weaponScript;
+    [SerializeField]
+    private Pistol pistolScript; 
 
     public SwitchingWeapons weaponSwitch;
 
     public string currentWeapon;
 
     public bool weaponEquipped;
+    public bool pistolEquipped;
 
     public float xPos;
     public float yPos;
@@ -27,6 +31,7 @@ public class WeaponPickUp : MonoBehaviour {
     {
         // weaponScript = GetComponent<Weapon>();
         weaponScript.enabled = false;
+        pistolScript.enabled = false;
         weaponSwitch.GetComponent<SwitchingWeapons>();
         weaponEquipped = false;
         {
@@ -38,6 +43,11 @@ public class WeaponPickUp : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        if(weaponEquipped == true && pistolEquipped == true)
+        {
+            weaponScript.enabled = true;
+            pistolScript.enabled = true;
+        }
 
     }
 
@@ -60,11 +70,24 @@ public class WeaponPickUp : MonoBehaviour {
         {
             obj.transform.SetParent(hand.transform, false);
             transform.localPosition = new Vector3(xPos, yPos, zPos);
-            weaponScript.enabled = true;
             GetComponent<BoxCollider>().enabled = false;
             print(currentWeapon);
-            weaponEquipped = true;
+            obj.SetActive(false);
             Debug.Log("Pick Up");
+
+            if(gameObject.name == "Rifle")
+            {
+                weaponScript.enabled = true;
+                weaponEquipped = true;
+                Debug.Log("Rifle Equipped");
+            }
+
+            if(gameObject.name == "Pistol")
+            {
+                pistolScript.enabled = true;
+                pistolEquipped = true;
+                Debug.Log("Pistol Equipped");
+            }
         }
     }
 }

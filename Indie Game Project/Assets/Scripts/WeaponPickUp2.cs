@@ -36,7 +36,7 @@ public class WeaponPickUp2 : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     /*void OnTriggerEnter(Collider other)
@@ -64,5 +64,10 @@ public class WeaponPickUp2 : MonoBehaviour {
             weaponEquipped = true;
             Debug.Log("Pick Up");
         }
+    }
+
+    private void OnMouseOver()
+    {
+        
     }
 }
