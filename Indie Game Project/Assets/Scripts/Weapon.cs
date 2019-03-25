@@ -17,6 +17,7 @@ public class Weapon : MonoBehaviour {
     public float recoilAmount = 0f;
     public float reloadTime = 1.5f; //time it takes to reload
     private bool isReloading = false; //is the gun reloading 
+    private bool isShooting = false;
 
     private float fireTime = 0f; //How quickly the gun can be fired
 
@@ -47,6 +48,8 @@ public class Weapon : MonoBehaviour {
     {
         isReloading = false;
         animator.SetBool("isReloading", false);
+        isShooting = false;
+        animator.SetBool("isShooting", false);
     }
 
     void Update()
@@ -80,6 +83,8 @@ public class Weapon : MonoBehaviour {
         if (Input.GetButtonUp("Fire1"))
         {
             StartCoroutine(RecoilCount());
+            StopCoroutine(Shooting());
+            animator.SetBool("isShooting", false);
         }
 
         ManualReload();
@@ -121,6 +126,13 @@ public class Weapon : MonoBehaviour {
         isReloading = false;
     }
 
+    IEnumerator Shooting()
+    {
+        isShooting = true;
+        animator.SetBool("isShooting", true);
+        yield return new WaitForSeconds(0f);
+    }
+
     Vector3 RandomizeSpray(Vector3 currentDir)
     {
         float r = currentBulletCount * weaponRecoil; //Increase the spray size depending on the current count of bullet fired
@@ -147,6 +159,7 @@ public class Weapon : MonoBehaviour {
             Destroy(impacteffectGO, 1.5f);
 
             SpawnDecal(hitInfo);
+            StartCoroutine(Shooting());
         }
     }
 

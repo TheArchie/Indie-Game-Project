@@ -12,4 +12,11 @@ public class Mission {
     public float expReward;
     public float otherReward;
 
+    public MissionGoal missionGoal;
+
+    public void Complete()
+    {
+        isActive = false;
+        Debug.Log(missionTitle + "was completed");
+    }
 }

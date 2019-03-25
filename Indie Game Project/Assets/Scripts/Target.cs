@@ -18,6 +18,8 @@ public class Target : MonoBehaviour {
     public float xpReward;
     public bool elite; 
 
+    public int ID { get; set; }
+
     [SerializeField]
     private PlayerAttributes player;
 
@@ -30,6 +32,7 @@ public class Target : MonoBehaviour {
         enemyLevel = Random.Range(1, 4);
         SettingVariables();
         EnemyHealth();
+        ID = 0;
     }
 
     // Update is called once per frame

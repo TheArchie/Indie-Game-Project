@@ -47,8 +47,7 @@ public class WeaponPickUp : MonoBehaviour {
         {
             weaponScript.enabled = true;
             pistolScript.enabled = true;
-        }
-
+        }       
     }
 
     /*void OnTriggerEnter(Collider other)

@@ -59,10 +59,16 @@ public class UI : MonoBehaviour {
     public Button scienceDecrease;
     public Button speechDecrease;
 
+    public GameObject AcceptQuest;
+    public GameObject DeclineQuest;
+    public GameObject CompleteQuest;
+
     private bool inventoryShown;
     public bool questWindowShown;
 
     public TextMeshProUGUI pistolammoText;
+
+    public Mission mission;
 
 	// Use this for initialization
 	void Start ()
@@ -91,6 +97,7 @@ public class UI : MonoBehaviour {
         medicineDecrease.interactable = false;
         scienceDecrease.interactable = false;
         speechDecrease.interactable = false;
+        CompleteQuest.SetActive(false);
         warningText.enabled = false;
     }
 
@@ -98,11 +105,11 @@ public class UI : MonoBehaviour {
     void Update ()
     {
         SettingTexts();
-        Test();
+        //Test();
         ShowUI();
 	}
 
-    void Test()
+    /*void Test()
     {
         if(weapon.enabled == true)
         {
@@ -112,7 +119,7 @@ public class UI : MonoBehaviour {
         {
             ammoText.enabled = false;
         }
-    }
+    }*/
 
     void ShowUI()
     {
@@ -181,14 +188,6 @@ public class UI : MonoBehaviour {
         {
             rifle.GetComponent<Weapon>().enabled = false;
         }
-
-        if(pistol.GetComponent<WeaponPickUp2>().weaponEquipped == true)
-        {
-            pistol.GetComponent<Pistol>().enabled = true;
-        }else
-        {
-            pistol.GetComponent<Pistol>().enabled = false;
-        }
     }
 
     void SettingTexts()
@@ -211,7 +210,7 @@ public class UI : MonoBehaviour {
         scienceText.text = "Science: " + playerAttributes.playerSkills.currentScience;
         speechText.text = "Speech: " + playerAttributes.playerSkills.currentSpeech;
 
-        /*if(rifle.GetComponent<WeaponPickUp>().weaponEquipped == true)
+        if(rifle.GetComponent<WeaponPickUp>().weaponEquipped == true)
         {
             ammoText.text = weapon.currentAmmo + " / " + weapon.maxAmmo;
         }else if(rifle.GetComponent<WeaponPickUp>().weaponEquipped == false)
@@ -219,7 +218,7 @@ public class UI : MonoBehaviour {
             ammoText.text = null;
         }
 
-        if(pistol.GetComponent<WeaponPickUp2>().weaponEquipped == true)
+        /*if(pistol.GetComponent<WeaponPickUp>().pistolEquipped == true)
         {
             pistolammoText.text = pistol.pistolCurrentAmmo + " / " + pistol.pistolMaxAmmo;
         }else

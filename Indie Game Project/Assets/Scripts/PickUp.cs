@@ -17,6 +17,8 @@ public class PickUp : MonoBehaviour {
     [SerializeField]
     private MissionGiver missionGiver;
 
+    public Door door;
+
 
 	// Use this for initialization
 	void Start ()
@@ -31,6 +33,8 @@ public class PickUp : MonoBehaviour {
         GameObject ammoBox = GameObject.Find("AmmoBox");
         ammoTest = GetComponent<AmmoTest>();
         ammoTest = GameObject.Find("AmmoBox").GetComponent<AmmoTest>();
+
+        door.GetComponent<Door>();
     }
 
     private void OnEnable()
@@ -42,6 +46,7 @@ public class PickUp : MonoBehaviour {
     void Update ()
     {
         Raycast();
+        OpenDoor();
 	}
 
     void Raycast()
@@ -87,6 +92,25 @@ public class PickUp : MonoBehaviour {
             }else if(Input.GetButtonDown("Interact") && missionGiver.missionWindowActive == true)
             {
                 missionGiver.HideUI();
+            }
+        }
+    }
+
+    public void OpenDoor()
+    {
+        if(Input.GetButtonDown("Interact"))
+        {
+            if(hitInfo.transform.gameObject.tag == "Door" && door.isOpening == false)
+            {
+                Debug.Log("Its a Door");
+
+                StartCoroutine(door.OpenDoor());
+            }else if(Input.GetButtonDown("Interact"))
+            {
+                if (hitInfo.transform.gameObject.tag == "Door" && door.isOpening == true)
+                {
+                    StartCoroutine(door.CloseDoor());
+                }
             }
         }
     }

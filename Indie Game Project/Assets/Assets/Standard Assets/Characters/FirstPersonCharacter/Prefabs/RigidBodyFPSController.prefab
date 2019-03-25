@@ -444,7 +444,16 @@ MonoBehaviour:
     currentScience: 15
     maxSpeech: 100
     currentSpeech: 15
+  pointsAdded:
+    lightWeaponsPointsAdded: 0
+    heavyWeaponsPointsAdded: 0
+    handgunsPointsAdded: 0
+    meleePointsAdded: 0
+    medicinePointsAdded: 0
+    sciencePointsAdded: 0
+    speechAdded: 0
   UIController: {fileID: 0}
+  missions: []
 --- !u!114 &114849084062904816
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -488,3 +497,5 @@ MonoBehaviour:
   distance: 3
   healingTest: {fileID: 0}
   ammoTest: {fileID: 0}
+  missionGiver: {fileID: 0}
+  door: {fileID: 0}

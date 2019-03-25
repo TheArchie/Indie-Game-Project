@@ -6,6 +6,8 @@ public class Door : MonoBehaviour {
 
     public Animator anim;
 
+    public bool isOpening;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -13,9 +15,10 @@ public class Door : MonoBehaviour {
         anim = GetComponent<Animator>();
 	}
 
-    private void Awake()
+    private void OnEnable()
     {
-
+        isOpening = false;
+        anim.SetBool("doorOpen", false);
     }
 
     // Update is called once per frame
@@ -24,18 +27,19 @@ public class Door : MonoBehaviour {
 
 	}
 
-    private void OnEnable()
+    public IEnumerator OpenDoor()
     {
-
+        isOpening = true;
+        anim.SetBool("doorOpen", true);
+        yield return new WaitForSeconds(0f);
+        Debug.Log("Door is Opening");
     }
 
-    private void OnTriggerEnter(Collider other)
+    public IEnumerator CloseDoor()
     {
-
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-
+        isOpening = false;
+        anim.SetBool("doorOpen", false);
+        yield return new WaitForSeconds(0f);
+        Debug.Log("Door is Closing");
     }
 }

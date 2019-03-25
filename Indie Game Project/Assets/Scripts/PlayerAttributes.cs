@@ -83,7 +83,7 @@ public class PlayerAttributes : MonoBehaviour {
     [SerializeField]
     private UI UIController;
 
-    public Mission mission;
+    public List<Mission> missions = new List<Mission>();
 
 	// Use this for initialization
 	void Start ()
@@ -96,6 +96,8 @@ public class PlayerAttributes : MonoBehaviour {
         playerAtts.xpNextLevel = 250f;
         playerAtts.abilityPoints = 0;
         playerAtts.skillPoints = 0;
+
+        //List<Mission> missions = new List<Mission>();
     }
 	
 	// Update is called once per frame
@@ -433,4 +435,6 @@ public class PlayerAttributes : MonoBehaviour {
             pointsAdded.speechAdded = 0;
         }
     }
+
+
 }
