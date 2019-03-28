@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class MissionGiver : MonoBehaviour {
+public class MissionGivers : MonoBehaviour {
 
     public Mission mission;
     public UI ui;
@@ -48,6 +48,7 @@ public class MissionGiver : MonoBehaviour {
         //playerAtts.mission = mission;
         playerAtts.missions.Add(mission);
         ui.UnPauseGame();
+        Debug.Log("Mission is Active");
     }
 
     public void DeclineQuest()

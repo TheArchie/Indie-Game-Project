@@ -34,6 +34,8 @@ GameObject:
   - component: {fileID: 114330927482601078}
   - component: {fileID: 114849084062904816}
   - component: {fileID: 114913939348089858}
+  - component: {fileID: 114169994480251566}
+  - component: {fileID: 114320619398058638}
   m_Layer: 0
   m_Name: RigidBodyFPSController
   m_TagString: Player
@@ -406,6 +408,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponChoice: 0
+--- !u!114 &114169994480251566
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad8305c6f164ff043b041556676c4ec9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDatabase: {fileID: 0}
+  uiInventory: {fileID: 0}
+--- !u!114 &114320619398058638
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7457f9bb5963c0042aebbed2fe29d02f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 2000000}
+  distance: 3
+  ammoTest: {fileID: 0}
+  healingTest: {fileID: 0}
 --- !u!114 &114330927482601078
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -422,6 +452,7 @@ MonoBehaviour:
     currentStamina: 0
     maxHealth: 100
     maxStamina: 100
+    money: 0
     playerisDead: 0
   playerAtts:
     playerLevel: 0
@@ -488,7 +519,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8ade75c7e36bbc48b85d958c3589bbf, type: 3}
   m_Name: 
@@ -498,4 +529,3 @@ MonoBehaviour:
   healingTest: {fileID: 0}
   ammoTest: {fileID: 0}
   missionGiver: {fileID: 0}
-  door: {fileID: 0}
