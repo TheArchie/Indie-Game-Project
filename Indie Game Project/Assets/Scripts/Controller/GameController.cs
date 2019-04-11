@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour {
 
     public GameObject hand;
-    public Camera deathCam;
+    //public Camera deathCam;
 
     public bool cursorLock;
 
@@ -18,7 +18,7 @@ public class GameController : MonoBehaviour {
     void Start ()
     {
         //hand.SetActive(false);
-        deathCam.enabled = false;
+        //deathCam.enabled = false;
         LockMouse();
         //playeratts = GetComponent<PlayerAttributes>();
     }

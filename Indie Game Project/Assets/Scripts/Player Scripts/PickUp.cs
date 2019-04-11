@@ -15,7 +15,7 @@ public class PickUp : MonoBehaviour {
     [SerializeField]
     private AmmoTest ammoTest;
     [SerializeField]
-    private MissionGiver missionGiver;
+    //private MissionGiver missionGiver;
 
 	// Use this for initialization
 	void Start ()
@@ -50,7 +50,7 @@ public class PickUp : MonoBehaviour {
         {
             Debug.Log(hitInfo.transform.name);
             PickupObject();
-            NPCInteraction();
+            //NPCInteraction();
         }
     }
 
@@ -82,7 +82,7 @@ public class PickUp : MonoBehaviour {
         }
     }
 
-    void NPCInteraction()
+    /*void NPCInteraction()
     {
         if (Input.GetButtonDown("Interact") && missionGiver.missionWindowActive == false)
         {
@@ -95,5 +95,5 @@ public class PickUp : MonoBehaviour {
                 missionGiver.HideUI();
             }
         }
-    }
+    }*/
 }
