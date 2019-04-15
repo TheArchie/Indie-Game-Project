@@ -51,12 +51,12 @@ public class DoorOpen : MonoBehaviour {
         {
             if(Input.GetButtonDown("Interact") && doorOpen == false)
             {
-                animator.SetBool("Open", true);
+                animator.SetBool("newdoorOpen", true);
                 doorOpen = true;
             }
         }else if(Input.GetButtonDown("Interact") && doorOpen == true)
         {
-            animator.SetBool("Open", false);
+            animator.SetBool("newdoorOpen", false);
             doorOpen = false;
         }
     }

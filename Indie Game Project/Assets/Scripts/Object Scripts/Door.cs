@@ -18,7 +18,7 @@ public class Door : MonoBehaviour {
     private void OnEnable()
     {
         isOpening = false;
-        anim.SetBool("doorOpen", false);
+        anim.SetBool("newdoorOpen", false);
     }
 
     // Update is called once per frame
@@ -30,7 +30,7 @@ public class Door : MonoBehaviour {
     public IEnumerator OpenDoor()
     {
         isOpening = true;
-        anim.SetBool("doorOpen", true);
+        anim.SetBool("newdoorOpen", true);
         yield return new WaitForSeconds(0f);
         Debug.Log("Door is Opening");
     }
@@ -38,7 +38,7 @@ public class Door : MonoBehaviour {
     public IEnumerator CloseDoor()
     {
         isOpening = false;
-        anim.SetBool("doorOpen", false);
+        anim.SetBool("newdoorOpen", false);
         yield return new WaitForSeconds(0f);
         Debug.Log("Door is Closing");
     }

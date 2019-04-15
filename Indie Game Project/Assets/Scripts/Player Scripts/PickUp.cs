@@ -14,8 +14,11 @@ public class PickUp : MonoBehaviour {
     private HealingTest healingTest;
     [SerializeField]
     private AmmoTest ammoTest;
-    [SerializeField]
+    //[SerializeField]
     //private MissionGiver missionGiver;
+
+    [SerializeField]
+    private Door door;
 
 	// Use this for initialization
 	void Start ()
@@ -41,14 +44,13 @@ public class PickUp : MonoBehaviour {
     void Update ()
     {
         Raycast();
-        //OpenDoor();
 	}
 
     void Raycast()
     {
         if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hitInfo, distance))
         {
-            Debug.Log(hitInfo.transform.name);
+            //Debug.Log(hitInfo.transform.name);
             PickupObject();
             //NPCInteraction();
         }
