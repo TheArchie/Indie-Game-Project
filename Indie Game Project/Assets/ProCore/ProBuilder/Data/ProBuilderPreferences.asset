@@ -26,21 +26,19 @@ MonoBehaviour:
   - pbBevelAmount
   - pbExtrudeDistance
   m_String_keys:
-  - pbVertexColorPrefs1
-  - pbVertexColorPrefs9
   - pbVertexColorPrefs7
+  - pbVertexColorPrefs8
   m_Color_keys: []
   m_Material_keys: []
   m_Bool_values: 00
-  m_Int_values: 000000000200000000000000000000000000000001000000
+  m_Int_values: 010000000200000000000000000000000000000001000000
   m_Float_values:
   - 0
   - 0
   - 0.1
-  - 0.01
+  - 1.5
   m_String_values:
-  - RGBA(0.368, 0.011, 0.011, 1.000)
-  - RGBA(0.253, 0.142, 0.419, 1.000)
-  - RGBA(0.515, 0.311, 0.053, 1.000)
+  - RGBA(0.934, 0.652, 0.934, 1.000)
+  - RGBA(0.545, 0.353, 0.169, 1.000)
   m_Color_values: []
   m_Material_values: []
