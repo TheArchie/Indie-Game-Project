@@ -235,6 +235,7 @@ public class UI : MonoBehaviour {
         skills.SetActive(false);
         abilites.SetActive(true);
         inventory.SetActive(false);
+        questWindow.SetActive(false);
     }
 
     public void ChangetoSkills()
@@ -242,6 +243,7 @@ public class UI : MonoBehaviour {
         skills.SetActive(true);
         abilites.SetActive(false);
         inventory.SetActive(false);
+        questWindow.SetActive(false);
     }
 
     public void ChangeToInventory()
@@ -249,5 +251,15 @@ public class UI : MonoBehaviour {
         inventory.SetActive(true);
         abilites.SetActive(false);
         skills.SetActive(false);
+        questWindow.SetActive(false);
+    }
+
+    public void ChangeToMission()
+    {
+        inventory.SetActive(false);
+        abilites.SetActive(false);
+        skills.SetActive(false);
+        questWindow.SetActive(true);
+
     }
 }

@@ -138,6 +138,13 @@ public class Pistol : MonoBehaviour {
             {
                 target.Damage(weaponDamage);
             }
+
+            VentGrill ventGrill = hitInfo.transform.GetComponent<VentGrill>();
+            if (ventGrill != null)
+            {
+                ventGrill.Damage(weaponDamage);
+            }
+
             GameObject impacteffectGO = Instantiate(impactEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
             Destroy(impacteffectGO, 1.5f);
 

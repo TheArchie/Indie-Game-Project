@@ -57,6 +57,13 @@ public class Melee : MonoBehaviour {
             {
                 target.Damage(meleeDamage);
             }
+
+            VentGrill ventGrill = hitInfo.transform.GetComponent<VentGrill>();
+            if (ventGrill != null)
+            {
+                ventGrill.Damage(meleeDamage);
+            }
+
             StartCoroutine(Punching());
         }
     }
