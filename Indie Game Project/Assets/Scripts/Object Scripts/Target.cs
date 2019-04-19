@@ -16,12 +16,16 @@ public class Target : MonoBehaviour {
     public int endurance;
     public float enemyDamage = 25f;
     public float xpReward;
-    public bool elite; 
+    public bool elite;
+
+    public string enemyName;
 
     public int ID { get; set; }
 
     [SerializeField]
     private PlayerAttributes player;
+
+    public UI uiController;
 
     // Use this for initialization
     void Start()
@@ -33,6 +37,8 @@ public class Target : MonoBehaviour {
         SettingVariables();
         EnemyHealth();
         ID = 0;
+
+        enemyName = this.gameObject.name;
     }
 
     // Update is called once per frame
@@ -53,6 +59,7 @@ public class Target : MonoBehaviour {
 
     void Death()
     {
+        StartCoroutine(AddedXP());
         Destroy(gameObject);
     }
 
@@ -114,5 +121,13 @@ public class Target : MonoBehaviour {
             xpReward = xpReward * 10;
             enemyDamage = enemyDamage * 2;
         }
+    }
+
+    IEnumerator AddedXP()
+    {
+        uiController.addedXPText.enabled = true;
+        uiController.addedXPText.text = "+" + xpReward.ToString() + "XP";
+        yield return new WaitForSeconds(0f);
+        uiController.addedXPText.enabled = false;
     }
 }

@@ -32,11 +32,14 @@ public class Weapon : MonoBehaviour {
     public PlayerAttributes playerAttributes;
     public UI ui;
 
+    bool isDead;
+
     //When the scene starts make current ammo equal to the magazine ammo
     void Start()
     {
         currentAmmo = magazineAmmo;
         playerAttributes.GetComponent<PlayerAttributes>();
+        isDead = false;
     }
 
     //When the scene enables, set the reload bool to false

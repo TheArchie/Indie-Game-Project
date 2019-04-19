@@ -49,6 +49,8 @@ public class UI : MonoBehaviour {
     public TextMeshProUGUI speechText;
     public TextMeshProUGUI warningText;
     public TextMeshProUGUI enemyText;
+    public TextMeshProUGUI addedXPText;
+    public TextMeshProUGUI objectiveText;
 
     public Button healthDecrease;
     public Button staminaDecrease;
@@ -64,12 +66,17 @@ public class UI : MonoBehaviour {
     public GameObject DeclineQuest;
     public GameObject CompleteQuest;
 
+    public Image bloodSplatter;
+    public Sprite blood1;
+    public Sprite blood2;
+
     private bool inventoryShown;
     public bool questWindowShown;
 
     public TextMeshProUGUI pistolammoText;
 
     public Mission mission;
+
 
 	// Use this for initialization
 	void Start ()
@@ -81,9 +88,12 @@ public class UI : MonoBehaviour {
         abilites.SetActive(false);
         questWindow.SetActive(false);
         inventory.SetActive(false);
+        bloodSplatter.enabled = false;
         inventoryShown = false;
         questWindowShown = false;
         enemyText.enabled = false;
+        addedXPText.enabled = false;
+        objectiveText.enabled = false;
 
         enemyText.text = enemyType;
 	}
@@ -109,6 +119,7 @@ public class UI : MonoBehaviour {
         SettingTexts();
         //Test();
         ShowUI();
+        BloodSplatter();
 	}
 
     /*void Test()
@@ -137,6 +148,7 @@ public class UI : MonoBehaviour {
             skills.SetActive(false);
             abilites.SetActive(false);
             inventory.SetActive(false);
+            questWindow.SetActive(false);
             inventoryShown = false;
             healthDecrease.interactable = false;
             staminaDecrease.interactable = false;
@@ -261,5 +273,17 @@ public class UI : MonoBehaviour {
         skills.SetActive(false);
         questWindow.SetActive(true);
 
+    }
+
+    public void BloodSplatter()
+    {
+        if(playerAttributes.playerInfo.currentHealth <= 33)
+        {
+            bloodSplatter.sprite = blood1;
+            bloodSplatter.enabled = true;
+        }else if(playerAttributes.playerInfo.currentHealth <= 10)
+        {
+            bloodSplatter.sprite = blood2;
+        }
     }
 }
