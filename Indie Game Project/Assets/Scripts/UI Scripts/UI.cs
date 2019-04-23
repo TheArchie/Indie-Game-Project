@@ -51,6 +51,9 @@ public class UI : MonoBehaviour {
     public TextMeshProUGUI enemyText;
     public TextMeshProUGUI addedXPText;
     public TextMeshProUGUI objectiveText;
+    public TextMeshProUGUI questTitleText;
+    public TextMeshProUGUI questDescriptionText;
+    public TextMeshProUGUI missionLogObjectiveText;
 
     public Button healthDecrease;
     public Button staminaDecrease;

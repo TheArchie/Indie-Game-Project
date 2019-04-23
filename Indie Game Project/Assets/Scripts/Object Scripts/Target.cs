@@ -60,7 +60,8 @@ public class Target : MonoBehaviour {
     void Death()
     {
         StartCoroutine(AddedXP());
-        Destroy(gameObject);
+        StartCoroutine(KillEnemy());
+        //Destroy(gameObject);
     }
 
     void EnemyHealth()
@@ -127,7 +128,13 @@ public class Target : MonoBehaviour {
     {
         uiController.addedXPText.enabled = true;
         uiController.addedXPText.text = "+" + xpReward.ToString() + "XP";
-        yield return new WaitForSeconds(0f);
+        yield return new WaitForSeconds(2f);
         uiController.addedXPText.enabled = false;
+    }
+
+    IEnumerator KillEnemy()
+    {
+        yield return new WaitForSeconds(2.1f);
+        Destroy(gameObject);
     }
 }

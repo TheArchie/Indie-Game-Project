@@ -11,6 +11,9 @@ public class TriggerTest : MonoBehaviour {
 
     public float xpReward = 150f;
 
+    public string questTitle;
+    public string questDescription;
+    public string questsubOjective;
     public string objective;
 
 	// Use this for initialization
@@ -33,7 +36,11 @@ public class TriggerTest : MonoBehaviour {
             playerAttributes.playerAtts.currentXp += xpReward;
             Debug.Log("Player Has Gained " + xpReward + "XP");
 
-            StartCoroutine(AddText());
+            StartCoroutine(AddText());      
+            StartCoroutine(AddedXP());      
+            uiController.missionLogObjectiveText.text = questsubOjective;
+            uiController.questTitleText.text = questTitle;
+            uiController.questDescriptionText.text = questDescription;
         }
     }
 
@@ -41,7 +48,7 @@ public class TriggerTest : MonoBehaviour {
     {
         if(other.tag == "Player")
         {
-            Destroy(gameObject);
+            Destroy(gameObject, 2f);
         }
     }
 
@@ -49,7 +56,24 @@ public class TriggerTest : MonoBehaviour {
     {
         uiController.objectiveText.enabled = true;
         uiController.objectiveText.text = objective;
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(2f);
         uiController.objectiveText.enabled = false;
+    }
+
+    IEnumerator AddedXP()
+    {
+        if(xpReward <= 0)
+        {
+            uiController.addedXPText.enabled = false;         
+        }else
+        {
+            if(xpReward >= 1)
+            {
+                uiController.addedXPText.enabled = true;
+                uiController.addedXPText.text = "+" + xpReward.ToString() + "XP";
+                yield return new WaitForSeconds(2f);
+                uiController.addedXPText.enabled = false;
+            }
+        }
     }
 }
