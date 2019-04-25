@@ -14,7 +14,8 @@ public class Target : MonoBehaviour {
     public float enemyLevel;
     public float health;
     public int endurance;
-    public float enemyDamage = 25f;
+    public float enemyDamage;
+    public float baseenemyDamage;
     public float xpReward;
     public bool elite;
 
@@ -26,6 +27,11 @@ public class Target : MonoBehaviour {
     private PlayerAttributes player;
 
     public UI uiController;
+
+    Renderer objRenderer;
+    CapsuleCollider capColl;
+
+    GameObject obj;
 
     // Use this for initialization
     void Start()
@@ -39,6 +45,11 @@ public class Target : MonoBehaviour {
         ID = 0;
 
         enemyName = this.gameObject.name;
+
+        CalculateEnemyDamage();
+
+        objRenderer = GetComponent<Renderer>();
+        capColl = GetComponent<CapsuleCollider>();
     }
 
     // Update is called once per frame
@@ -61,7 +72,7 @@ public class Target : MonoBehaviour {
     {
         StartCoroutine(AddedXP());
         StartCoroutine(KillEnemy());
-        //Destroy(gameObject);
+        //Destroy(transform.parent.gameObject);
     }
 
     void EnemyHealth()
@@ -73,6 +84,13 @@ public class Target : MonoBehaviour {
         {
             health = calculation2 * 2;
         }
+    }
+
+    void CalculateEnemyDamage()
+    {
+        var calculation = endurance * enemyLevel + 50;
+        var calculation2 = calculation / 100;
+        enemyDamage = Mathf.Round(calculation2 * baseenemyDamage);
     }
 
     void OnCollisionEnter(Collision collision)
@@ -91,30 +109,35 @@ public class Target : MonoBehaviour {
         {
             endurance = Random.Range(1, 3);
             xpReward = 10f;
+            baseenemyDamage = 10;
         }
 
         if (enemyClasses == EnemyClass.Small)
         {
             endurance = Random.Range(3, 5);
             xpReward = 20f;
+            baseenemyDamage = 20;
         }
 
         if (enemyClasses == EnemyClass.Medium)
         {
             endurance = Random.Range(5, 7);
             xpReward = 30f;
+            baseenemyDamage = 30;
         }
 
         if (enemyClasses == EnemyClass.Big)
         {
             endurance = Random.Range(7, 9);
             xpReward = 40f;
+            baseenemyDamage = 40;
         }
 
         if (enemyClasses == EnemyClass.veryBig)
         {
             endurance = Random.Range(9, 11);
             xpReward = 50f;
+            baseenemyDamage = 50;
         }
 
         if(elite == true)
@@ -134,7 +157,10 @@ public class Target : MonoBehaviour {
 
     IEnumerator KillEnemy()
     {
+        objRenderer.enabled = false;
+        capColl.enabled = false;
         yield return new WaitForSeconds(2.1f);
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        Destroy(transform.parent.gameObject);
     }
 }

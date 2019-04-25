@@ -437,6 +437,4 @@ public class PlayerAttributes : MonoBehaviour {
             pointsAdded.speechAdded = 0;
         }
     }
-
-
 }

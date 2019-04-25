@@ -41,6 +41,7 @@ public class Raycast : MonoBehaviour
         {
             enemyText.enabled = true;
             enemyText.text = hitInfo.transform.gameObject.name;
+            enemyText.color = Color.red;
         }else
         {
             if(hitInfo.transform.gameObject.tag != "Enemy")

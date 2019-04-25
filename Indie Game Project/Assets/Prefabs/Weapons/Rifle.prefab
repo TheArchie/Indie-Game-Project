@@ -267,7 +267,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1717701293756782}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11, y: 1, z: -5}
+  m_LocalPosition: {x: -11.488, y: 1.38, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4433236733211210}
@@ -686,6 +686,8 @@ MonoBehaviour:
   impactEffect: {fileID: 1199072690879978, guid: 88a801d02bbd92849b5d9196e4452500,
     type: 2}
   bulletDecal: {fileID: 1476870098304274, guid: 12a203af241627045962e95044620170,
+    type: 2}
+  bloodEffect: {fileID: 1032236037823720, guid: 69b4b734512de3e4abb8bcdb649fa0da,
     type: 2}
   playerAttributes: {fileID: 0}
   ui: {fileID: 0}

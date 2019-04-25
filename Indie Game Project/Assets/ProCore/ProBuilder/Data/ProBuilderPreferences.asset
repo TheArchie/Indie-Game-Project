@@ -13,6 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Bool_keys:
   - pbIconGUI
+  - pb_SmoothingGroupEditor::m_ShowPreview
+  - pb_SmoothingGroupEditor::m_DrawNormals
   m_Int_keys:
   - pbDefaultEditLevel
   - pbDefaultSelectionMode
@@ -29,7 +31,7 @@ MonoBehaviour:
   - pbVertexColorPrefs5
   m_Color_keys: []
   m_Material_keys: []
-  m_Bool_values: 00
+  m_Bool_values: 000000
   m_Int_values: 010000000200000000000000000000000000000001000000
   m_Float_values:
   - 0

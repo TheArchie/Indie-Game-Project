@@ -28,6 +28,7 @@ public class Pistol : MonoBehaviour {
     public ParticleSystem muzzleFlash; //partical system variable for muzzle flash
     public GameObject impactEffect; //Impact effect Partical System
     public GameObject bulletDecal; //bullet holes variable
+    public GameObject bloodEffect; //bullet holes variable
 
     public PlayerAttributes playerAttributes;
 
@@ -145,8 +146,17 @@ public class Pistol : MonoBehaviour {
                 ventGrill.Damage(weaponDamage);
             }
 
-            GameObject impacteffectGO = Instantiate(impactEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
-            Destroy(impacteffectGO, 1.5f);
+            if (hitInfo.transform.gameObject.tag != "Enemy")
+            {
+                GameObject impacteffectGO = Instantiate(impactEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+                Destroy(impacteffectGO, 1.5f);
+            }
+
+            if (hitInfo.transform.gameObject.tag == "Enemy")
+            {
+                GameObject bloodeffectGo = Instantiate(bloodEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+                Destroy(bloodeffectGo, 1.5f);
+            }
 
             SpawnDecal(hitInfo);
             StartCoroutine(Shooting());
@@ -156,11 +166,14 @@ public class Pistol : MonoBehaviour {
     //Function for spawning the decals and destroying them 
     void SpawnDecal(RaycastHit hitInfo)
     {
-        var decal = Instantiate(bulletDecal);
-        decal.transform.position = hitInfo.point;
-        decal.transform.forward = hitInfo.normal * -1f;
-        Destroy(decal, 5f);
-        decal.transform.parent = hitInfo.transform;
+        if (hitInfo.transform.gameObject.tag != "Enemy")
+        {
+            var decal = Instantiate(bulletDecal);
+            decal.transform.position = hitInfo.point;
+            decal.transform.forward = hitInfo.normal * -1f;
+            Destroy(decal, 2f);
+            decal.transform.parent = hitInfo.transform;
+        }
     }
 
     void ManualReload()
