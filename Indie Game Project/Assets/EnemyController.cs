@@ -5,9 +5,14 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour {
 
-    public float lookRadius = 10f;
+    public float lookRadius;
+    public float persuitlookRadius;
+    public float retreatDistance;
     Transform target;
     NavMeshAgent agent;
+
+    public EnemyPatrol enemyPatrol;
+    public Target enemyTarget;
 
 
 	// Use this for initialization
@@ -20,18 +25,29 @@ public class EnemyController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        EnemyChase();
+	}
+
+    public void EnemyChase()
+    {
         float distance = Vector3.Distance(target.position, transform.position);
-		
-        if(distance <= lookRadius)
+
+        if (distance <= lookRadius)
         {
             agent.SetDestination(target.position);
+            lookRadius = persuitlookRadius;
+            Debug.Log("Distance is " + distance);
 
-            if(distance <= agent.stoppingDistance)
+            if (distance <= agent.stoppingDistance)
             {
                 LookAtTarget();
             }
         }
-	}
+        else
+        {
+            lookRadius = 2;
+        }
+    }
 
     void LookAtTarget()
     {

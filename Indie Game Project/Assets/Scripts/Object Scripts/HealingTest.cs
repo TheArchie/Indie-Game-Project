@@ -13,10 +13,12 @@ public class HealingTest : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        GameObject player = GameObject.Find("Player");
+        /*GameObject player = GameObject.Find("Player");
 
         playerAttributes = GetComponent<PlayerAttributes>();
-        playerAttributes = GameObject.Find("Player").GetComponent<PlayerAttributes>();
+        playerAttributes = GameObject.Find("Player").GetComponent<PlayerAttributes>();*/
+
+        playerAttributes = FindObjectOfType<PlayerAttributes>();
 	}
 	
 	// Update is called once per frame

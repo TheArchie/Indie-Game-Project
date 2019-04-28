@@ -23,6 +23,8 @@ public class Target : MonoBehaviour {
 
     public int ID { get; set; }
 
+    public float damageTimer;
+
     [SerializeField]
     private PlayerAttributes player;
 
@@ -32,6 +34,9 @@ public class Target : MonoBehaviour {
     CapsuleCollider capColl;
 
     GameObject obj;
+
+    Coroutine farts;
+
 
     // Use this for initialization
     void Start()
@@ -48,8 +53,9 @@ public class Target : MonoBehaviour {
 
         CalculateEnemyDamage();
 
-        objRenderer = GetComponent<Renderer>();
-        capColl = GetComponent<CapsuleCollider>();
+        uiController.GetComponent<UI>();
+        //objRenderer = GetComponent<Renderer>();
+        //capColl = GetComponent<CapsuleCollider>();
     }
 
     // Update is called once per frame
@@ -71,8 +77,8 @@ public class Target : MonoBehaviour {
     void Death()
     {
         StartCoroutine(AddedXP());
-        StartCoroutine(KillEnemy());
-        //Destroy(transform.parent.gameObject);
+        //StartCoroutine(KillEnemy());
+        Destroy(transform.parent.gameObject);
     }
 
     void EnemyHealth()
@@ -99,8 +105,18 @@ public class Target : MonoBehaviour {
         if(player != null)
         {
            player.DamagePlayer(enemyDamage);
-            Debug.Log("Player Health is " + player.playerInfo.currentHealth);
+           Debug.Log("Player Health is " + player.playerInfo.currentHealth);
+           //damageTimer += Time.deltaTime;
+           //Debug.Log(damageTimer);
         } 
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(player != null)
+        {
+
+        }
     }
 
     void SettingVariables()
@@ -152,13 +168,13 @@ public class Target : MonoBehaviour {
         uiController.addedXPText.enabled = true;
         uiController.addedXPText.text = "+" + xpReward.ToString() + "XP";
         yield return new WaitForSeconds(2f);
-        uiController.addedXPText.enabled = false;
+        //uiController.addedXPText.enabled = false;
     }
 
     IEnumerator KillEnemy()
     {
-        objRenderer.enabled = false;
-        capColl.enabled = false;
+        //objRenderer.enabled = false;
+        //capColl.enabled = false;
         yield return new WaitForSeconds(2.1f);
         //Destroy(gameObject);
         Destroy(transform.parent.gameObject);

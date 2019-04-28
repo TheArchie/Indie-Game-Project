@@ -19,7 +19,10 @@ public class TriggerTest : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        playerAttributes.GetComponent<PlayerAttributes>();
+        //playerAttributes.GetComponent<PlayerAttributes>();
+
+        playerAttributes = FindObjectOfType<PlayerAttributes>();
+        uiController = FindObjectOfType<UI>();
 	}
 	
 	// Update is called once per frame

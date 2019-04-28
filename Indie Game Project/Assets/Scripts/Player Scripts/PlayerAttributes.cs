@@ -128,7 +128,8 @@ public class PlayerAttributes : MonoBehaviour {
 
     public void Die()
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
+
         playerInfo.playerisDead = true;
         {
             Debug.Log("Dead");
