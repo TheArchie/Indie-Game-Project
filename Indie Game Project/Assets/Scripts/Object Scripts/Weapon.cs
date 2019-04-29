@@ -13,7 +13,7 @@ public class Weapon : MonoBehaviour {
     public int magazineAmmo = 20; //Maximum ammo of the magazine
     public int currentAmmo; //the guns current ammo
     public float fireRate = 10f; //firerate of the gun
-    public float weaponRecoil = 0.05f; //recoil of the weapon
+    public float weaponRecoil = 0.03f; //recoil of the weapon
     public float recoilAmount = 0f;
     public float reloadTime = 1.5f; //time it takes to reload
     private bool isReloading = false; //is the gun reloading 
@@ -96,7 +96,7 @@ public class Weapon : MonoBehaviour {
 
     IEnumerator RecoilCount()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.75f);
         //currentBulletCount--;
         currentBulletCount = 0;
         if(currentBulletCount <= 0)

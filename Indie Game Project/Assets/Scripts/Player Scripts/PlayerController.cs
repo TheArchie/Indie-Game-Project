@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour {
 
     //Player Crouch Vars
     private float crouchHeight = 0.1f;
-    private float standHeight = 2f;
+    private float standHeight = 2.5f;
 
     //Mouse Look Variables
     public float Ysensitivity = 1f;

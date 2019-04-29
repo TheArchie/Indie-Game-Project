@@ -20,6 +20,12 @@ public class PickUp : MonoBehaviour {
     [SerializeField]
     private Door door;
 
+    public PlayerAttributes player;
+    public UI uiController;
+
+    public int shipParts;
+    public int maxshipParts = 2;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -33,6 +39,12 @@ public class PickUp : MonoBehaviour {
         GameObject ammoBox = GameObject.Find("AmmoBox");
         ammoTest = GetComponent<AmmoTest>();
         ammoTest = GameObject.Find("AmmoBox").GetComponent<AmmoTest>();
+
+        player = FindObjectOfType<PlayerAttributes>();
+        uiController = FindObjectOfType<UI>();
+        //uiController.GetComponent<UI>();
+
+        shipParts = 0;
     }
 
     private void OnEnable()
@@ -79,6 +91,20 @@ public class PickUp : MonoBehaviour {
             if (hitInfo.transform.gameObject.tag == "PickUP")
             {
                 Debug.Log("This is a " + hitInfo.transform.name);
+                Destroy(hitInfo.transform.gameObject);
+            }
+
+            if(hitInfo.transform.gameObject.tag == "Computer" && player.playerSkills.currentScience >= 25)
+            {
+                Debug.Log("Use Computer");
+                uiController.EnableDesktop();
+            }else if(hitInfo.transform.gameObject.tag == "Computer" && player.playerSkills.currentScience <= 24)
+            {
+                Debug.Log("Science Skill Not High Enough");
+            }
+
+            if(hitInfo.transform.gameObject.tag == "RepairPart")
+            {
                 Destroy(hitInfo.transform.gameObject);
             }
         }

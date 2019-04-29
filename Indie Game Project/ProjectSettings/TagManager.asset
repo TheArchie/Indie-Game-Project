@@ -15,6 +15,10 @@ TagManager:
   - Health
   - NPC
   - Money
+  - Computer
+  - Paper
+  - EscapePod
+  - RepairPart
   layers:
   - Default
   - TransparentFX

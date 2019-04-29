@@ -26,6 +26,13 @@ public class UI : MonoBehaviour {
     public GameObject abilites;
     public GameObject questWindow;
     public GameObject inventory;
+    public GameObject computerScreen;
+    public GameObject notesPage;
+    public GameObject deathScreen;
+    public GameObject pauseScreen;
+    public GameObject mainMenuPrompt;
+    public GameObject desktopPrompt;
+
 
     public string enemyType;
 
@@ -65,6 +72,9 @@ public class UI : MonoBehaviour {
     public Button scienceDecrease;
     public Button speechDecrease;
 
+    public Button desktopIconButton;
+    public Button closeButton;
+
     public GameObject AcceptQuest;
     public GameObject DeclineQuest;
     public GameObject CompleteQuest;
@@ -74,7 +84,12 @@ public class UI : MonoBehaviour {
     public Sprite blood2;
 
     private bool inventoryShown;
+    private bool pauseScreenShown;
     public bool questWindowShown;
+    public bool menuPromptShown;
+    public bool quitPromptShown;
+    public bool computerScreenShown;
+
 
     public TextMeshProUGUI pistolammoText;
 
@@ -92,8 +107,20 @@ public class UI : MonoBehaviour {
         questWindow.SetActive(false);
         inventory.SetActive(false);
         bloodSplatter.enabled = false;
+        computerScreen.SetActive(false);
+        notesPage.SetActive(false);
+        deathScreen.SetActive(false);
+        pauseScreen.SetActive(false);
+        mainMenuPrompt.SetActive(false);
+        desktopPrompt.SetActive(false);
+
         inventoryShown = false;
         questWindowShown = false;
+        pauseScreenShown = false;
+        menuPromptShown = false;
+        quitPromptShown = false;
+        computerScreenShown = false;
+
         enemyText.enabled = false;
         addedXPText.enabled = false;
         objectiveText.enabled = false;
@@ -123,6 +150,7 @@ public class UI : MonoBehaviour {
         //Test();
         ShowUI();
         BloodSplatter();
+        PauseScreen();
 	}
 
     /*void Test()
@@ -139,7 +167,7 @@ public class UI : MonoBehaviour {
 
     void ShowUI()
     {
-        if(Input.GetButtonDown("Inventory") && inventoryShown == false)
+        if(Input.GetButtonDown("Inventory") && inventoryShown == false && pauseScreenShown == false && computerScreenShown == false)
         {
             skills.SetActive(true);
             inventoryShown = true;
@@ -178,6 +206,21 @@ public class UI : MonoBehaviour {
         }
     }
 
+    public void PauseScreen()
+    {
+        if(Input.GetButtonDown("Pause") && pauseScreenShown == false && inventoryShown == false && questWindowShown == false && computerScreenShown == false)
+        {
+            PauseGame();
+            pauseScreenShown = true;
+            pauseScreen.SetActive(true);
+        }else if(Input.GetButtonDown("Pause") && pauseScreenShown == true && inventoryShown == false && questWindowShown == false && computerScreenShown == false)
+        {
+            UnPauseGame();
+            pauseScreenShown = false;
+            pauseScreen.SetActive(false);
+        }
+    }
+
     public void PauseGame()
     {
         Time.timeScale = 0;
@@ -206,6 +249,60 @@ public class UI : MonoBehaviour {
         {
             rifle.GetComponent<Weapon>().enabled = false;
         }
+
+        if(pauseScreenShown == true)
+        {
+            pauseScreen.SetActive(false);
+            pauseScreenShown = false;
+        }
+
+        if(mainMenuPrompt == true)
+        {
+            mainMenuPrompt.SetActive(false);
+            menuPromptShown = false;
+        }
+
+        if (quitPromptShown == true)
+        {
+            desktopPrompt.SetActive(false);
+            quitPromptShown = false;
+        }
+    }
+
+    public void MenuPrompt()
+    {
+        pauseScreen.SetActive(false);
+        mainMenuPrompt.SetActive(true);
+        menuPromptShown = true;
+    }
+
+    public void QuitToDesktop()
+    {
+        pauseScreen.SetActive(false);
+        desktopPrompt.SetActive(true);
+        quitPromptShown = true;
+    }
+
+    public void MenuYes()
+    {
+        Debug.Log("Main Menu");
+    }
+
+    public void QuitYes()
+    {
+        Application.Quit();
+    }
+
+    public void MenuNo()
+    {
+        pauseScreen.SetActive(true);
+        mainMenuPrompt.SetActive(false);
+    }
+
+    public void QuitNp()
+    {
+        pauseScreen.SetActive(true);
+        desktopPrompt.SetActive(false);
     }
 
     void SettingTexts()
@@ -288,5 +385,26 @@ public class UI : MonoBehaviour {
         {
             bloodSplatter.sprite = blood2;
         }
+    }
+
+    public void EnableDesktop()
+    {
+        computerScreen.SetActive(true);
+        PauseGame();
+        computerScreenShown = true;
+        Debug.Log(computerScreenShown);
+    }
+
+    public void DisableDesktop()
+    {
+        computerScreen.SetActive(false);
+        notesPage.SetActive(false);
+        UnPauseGame();
+        computerScreenShown = false;
+    }
+
+    public void DesktopIcon()
+    {
+        notesPage.SetActive(true);
     }
 }
