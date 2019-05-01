@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Pistol : MonoBehaviour {
 
@@ -31,6 +33,9 @@ public class Pistol : MonoBehaviour {
     public GameObject bloodEffect; //bullet holes variable
 
     public PlayerAttributes playerAttributes;
+
+    public GameObject pistolCanvas;
+    public TextMeshProUGUI ammoText;
 
     //When the scene starts make current ammo equal to the magazine ammo
     void Start()
@@ -85,7 +90,7 @@ public class Pistol : MonoBehaviour {
             currentBulletCount = 0;
 
         ManualReload();
-
+        UpdateAmmo();
         CalculateWeaponDamage();
     }
 
@@ -189,5 +194,10 @@ public class Pistol : MonoBehaviour {
         var calculation = playerAttributes.playerSkills.currentRifles * 0.5f + 50;
         var calculation2 = calculation / 100;
         weaponDamage = Mathf.Round(weaponBaseDamage * calculation2);
+    }
+
+    void UpdateAmmo()
+    {
+        ammoText.text = pistolCurrentAmmo + " / " + pistolMaxAmmo;
     }
 }

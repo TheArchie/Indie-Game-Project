@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour {
 
     public float lookRadius;
+    public float maxLookRadius;
     public float persuitlookRadius;
     public float retreatDistance;
     Transform target;
@@ -20,6 +21,8 @@ public class EnemyController : MonoBehaviour {
     {
         agent = GetComponent<NavMeshAgent>();
         target = PlayerManager.instance.player.transform;
+
+        lookRadius = maxLookRadius;
 	}
 	
 	// Update is called once per frame
@@ -45,7 +48,7 @@ public class EnemyController : MonoBehaviour {
         }
         else
         {
-            lookRadius = 2;
+            lookRadius = maxLookRadius;
         }
     }
 

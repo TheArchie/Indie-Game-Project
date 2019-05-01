@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Weapon : MonoBehaviour {
 
@@ -32,6 +34,9 @@ public class Weapon : MonoBehaviour {
 
     public PlayerAttributes playerAttributes;
     public UI ui;
+
+    public GameObject pistolCanvas;
+    public TextMeshProUGUI ammoText;
 
     bool isDead;
 
@@ -90,7 +95,7 @@ public class Weapon : MonoBehaviour {
         }
 
         ManualReload();
-
+        UpdateAmmo();
         CalculateWeaponDamage();
     }
 
@@ -204,5 +209,10 @@ public class Weapon : MonoBehaviour {
         var calculation = playerAttributes.playerSkills.currentRifles * 0.5f + 50;
         var calculation2 = calculation / 100;
         weaponDamage = Mathf.Round(weaponBaseDamage * calculation2);
+    }
+
+    void UpdateAmmo()
+    {
+        ammoText.text = currentAmmo + " / " + maxAmmo;
     }
 }

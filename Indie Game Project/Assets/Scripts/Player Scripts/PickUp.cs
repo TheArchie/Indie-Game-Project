@@ -26,8 +26,8 @@ public class PickUp : MonoBehaviour {
     public int shipParts;
     public int maxshipParts = 2;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
         //healingTest.GetComponent<HealingTest>();
         //ammoTest.GetComponent<AmmoTest>();
@@ -56,7 +56,7 @@ public class PickUp : MonoBehaviour {
     void Update ()
     {
         Raycast();
-	}
+    }
 
     void Raycast()
     {
@@ -110,6 +110,14 @@ public class PickUp : MonoBehaviour {
         }
     }
 
+        /*if (hitInfo.transform.gameObject.tag == "RepairPart")
+        {
+            promptText.enabled = true;
+            promptText.text = "Press E to Pickup " + hitInfo.transform.gameObject.name;
+            promptText.color = Color.white;
+        }*/
+    }
+
     /*void NPCInteraction()
     {
         if (Input.GetButtonDown("Interact") && missionGiver.missionWindowActive == false)
@@ -124,4 +132,3 @@ public class PickUp : MonoBehaviour {
             }
         }
     }*/
-}

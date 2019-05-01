@@ -13,6 +13,8 @@ public class Raycast : MonoBehaviour
 
     public TextMeshProUGUI enemyText;
 
+    public Target enemy;
+
     //public Target enemy;
 
 
@@ -33,7 +35,7 @@ public class Raycast : MonoBehaviour
     {
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitInfo, distance))
         {
-            ItemPickUpPrompt();
+            //ItemPickUpPrompt();
         }
     }
     void RaycastForEnemy()
@@ -44,7 +46,7 @@ public class Raycast : MonoBehaviour
         }
     }
 
-    void ItemPickUpPrompt()
+    /*void ItemPickUpPrompt()
     {
         if(hitInfo.transform.gameObject.tag == "Weapon")
         {
@@ -66,7 +68,7 @@ public class Raycast : MonoBehaviour
             enemyText.text = "Press E to Pickup " + hitInfo.transform.gameObject.name;
             enemyText.color = Color.white;
         }
-    }
+    }*/
 
     void DetectEnemy()
     {
@@ -75,6 +77,9 @@ public class Raycast : MonoBehaviour
             enemyText.enabled = true;
             enemyText.text = hitInfo.transform.gameObject.name;
             enemyText.color = Color.red;
+        }else if(hitInfo.transform.gameObject.tag != "Enemy")
+        {
+            enemyText.enabled = false;
         }
     }
 }

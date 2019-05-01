@@ -24,6 +24,7 @@ public class Target : MonoBehaviour {
     public int ID { get; set; }
 
     public float damageTimer;
+    public float force;
 
     [SerializeField]
     private PlayerAttributes player;
@@ -42,7 +43,11 @@ public class Target : MonoBehaviour {
     void Start()
     {
         //player = GetComponent<PlayerAttributes>();
-        player.GetComponent<PlayerAttributes>();
+        //player.GetComponent<PlayerAttributes>();
+        //uiController.GetComponent<UI>();
+
+        player = FindObjectOfType<PlayerAttributes>();
+        uiController = FindObjectOfType<UI>();
 
         enemyLevel = Random.Range(1, 4);
         SettingVariables();
@@ -99,7 +104,7 @@ public class Target : MonoBehaviour {
         enemyDamage = Mathf.Round(calculation2 * baseenemyDamage);
     }
 
-    void OnCollisionEnter(Collision collision)
+    /*void OnCollisionEnter(Collision collision)
     {
         PlayerAttributes player = collision.collider.GetComponent<PlayerAttributes>();
         if(player != null)
@@ -109,13 +114,31 @@ public class Target : MonoBehaviour {
            //damageTimer += Time.deltaTime;
            //Debug.Log(damageTimer);
         } 
+    }*/
+
+    private void OnTriggerEnter(Collider other)
+    {
+        PlayerAttributes player = other.GetComponent<PlayerAttributes>();
+        if (player != null)
+        {
+            player.DamagePlayer(enemyDamage);
+            Debug.Log("Player Health is " + player.playerInfo.currentHealth);
+        }
     }
 
     private void OnTriggerStay(Collider other)
     {
         if(player != null)
         {
-
+            if(other.tag == "Player")
+            {
+                Debug.Log("Player is in Trigger");
+                damageTimer += Time.deltaTime;
+                if(damageTimer >= 1)
+                {
+                    //StartCoroutine(DamageFewSeconds());
+                }
+            }
         }
     }
 
@@ -179,4 +202,14 @@ public class Target : MonoBehaviour {
         //Destroy(gameObject);
         Destroy(transform.parent.gameObject);
     }
+
+    /*IEnumerator DamageFewSeconds()
+    {
+        while(true)
+        {
+            player.DamagePlayer(enemyDamage);
+            yield return new WaitForSeconds(2f);
+            damageTimer = 0;
+        }
+    }*/
 }
