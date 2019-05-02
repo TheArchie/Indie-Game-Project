@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
+
 
 public class UI : MonoBehaviour {
 
@@ -32,6 +34,8 @@ public class UI : MonoBehaviour {
     public GameObject pauseScreen;
     public GameObject mainMenuPrompt;
     public GameObject desktopPrompt;
+    public GameObject options;
+
 
 
     public string enemyType;
@@ -89,6 +93,7 @@ public class UI : MonoBehaviour {
     public bool menuPromptShown;
     public bool quitPromptShown;
     public bool computerScreenShown;
+    public bool optionsShown;
 
 
     public TextMeshProUGUI pistolammoText;
@@ -113,6 +118,7 @@ public class UI : MonoBehaviour {
         pauseScreen.SetActive(false);
         mainMenuPrompt.SetActive(false);
         desktopPrompt.SetActive(false);
+        options.SetActive(false);
 
         inventoryShown = false;
         questWindowShown = false;
@@ -120,6 +126,7 @@ public class UI : MonoBehaviour {
         menuPromptShown = false;
         quitPromptShown = false;
         computerScreenShown = false;
+        optionsShown = false;
 
         enemyText.enabled = false;
         addedXPText.enabled = false;
@@ -267,6 +274,25 @@ public class UI : MonoBehaviour {
             desktopPrompt.SetActive(false);
             quitPromptShown = false;
         }
+
+        if (optionsShown == true)
+        {
+            options.SetActive(false);
+            optionsShown = false;
+        }
+    }
+
+    public void Options()
+    {
+        pauseScreen.SetActive(false);
+        options.SetActive(true);
+        optionsShown = true;
+    }
+    
+    public void OptionsReturn()
+    {
+        pauseScreen.SetActive(true);
+        options.SetActive(false);
     }
 
     public void MenuPrompt()
@@ -276,6 +302,18 @@ public class UI : MonoBehaviour {
         menuPromptShown = true;
     }
 
+    public void MenuYes()
+    {
+        Debug.Log("Main Menu");
+        SceneManager.LoadScene("Main Menu");
+    }
+
+    public void MenuNo()
+    {
+        pauseScreen.SetActive(true);
+        mainMenuPrompt.SetActive(false);
+    }
+
     public void QuitToDesktop()
     {
         pauseScreen.SetActive(false);
@@ -283,20 +321,9 @@ public class UI : MonoBehaviour {
         quitPromptShown = true;
     }
 
-    public void MenuYes()
-    {
-        Debug.Log("Main Menu");
-    }
-
     public void QuitYes()
     {
         Application.Quit();
-    }
-
-    public void MenuNo()
-    {
-        pauseScreen.SetActive(true);
-        mainMenuPrompt.SetActive(false);
     }
 
     public void QuitNp()
