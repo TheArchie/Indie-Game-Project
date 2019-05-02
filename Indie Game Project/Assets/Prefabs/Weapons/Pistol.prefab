@@ -841,7 +841,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponDamage: 0
-  weaponBaseDamage: 16
+  weaponBaseDamage: 24
   pistolMaxAmmo: 120
   pistolMagazineAmmo: 12
   pistolCurrentAmmo: 0

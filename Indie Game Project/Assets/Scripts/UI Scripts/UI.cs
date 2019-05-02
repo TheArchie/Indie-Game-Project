@@ -35,6 +35,7 @@ public class UI : MonoBehaviour {
     public GameObject mainMenuPrompt;
     public GameObject desktopPrompt;
     public GameObject options;
+    public GameObject winScreen;
 
 
 
@@ -107,7 +108,7 @@ public class UI : MonoBehaviour {
         //gameController = GetComponent<GameController>();
         //gameController = gameObject.AddComponent<GameController>();
 
-        skills.SetActive(false);
+        skills.SetActive(true);
         abilites.SetActive(false);
         questWindow.SetActive(false);
         inventory.SetActive(false);
@@ -119,8 +120,9 @@ public class UI : MonoBehaviour {
         mainMenuPrompt.SetActive(false);
         desktopPrompt.SetActive(false);
         options.SetActive(false);
+        winScreen.SetActive(false);
 
-        inventoryShown = false;
+        inventoryShown = true;
         questWindowShown = false;
         pauseScreenShown = false;
         menuPromptShown = false;
@@ -133,7 +135,8 @@ public class UI : MonoBehaviour {
         objectiveText.enabled = false;
 
         enemyText.text = enemyType;
-	}
+        PauseGame();
+    }
 
     private void OnEnable()
     {
@@ -147,7 +150,7 @@ public class UI : MonoBehaviour {
         scienceDecrease.interactable = false;
         speechDecrease.interactable = false;
         CompleteQuest.SetActive(false);
-        warningText.enabled = false;
+        warningText.enabled = true;
     }
 
     // Update is called once per frame
@@ -210,6 +213,7 @@ public class UI : MonoBehaviour {
         }else if(Input.GetButtonDown("Inventory") && inventoryShown == true && playerAttributes.playerAtts.skillPoints >= 1 && playerAttributes.playerAtts.abilityPoints >= 1)
         {
             warningText.enabled = true;
+            warningText.text = "You Have " + playerAttributes.playerAtts.skillPoints + " Skill Points and " + playerAttributes.playerAtts.abilityPoints + " Ability Points left to distribute.";
         }
     }
 
@@ -255,6 +259,15 @@ public class UI : MonoBehaviour {
         }else
         {
             rifle.GetComponent<Weapon>().enabled = false;
+        }
+
+        if(pistol.GetComponent<WeaponPickUp>().pistolEquipped == true)
+        {
+            pistol.GetComponent<Pistol>().enabled = true;
+        }
+        else
+        {
+            pistol.GetComponent<Pistol>().enabled = false;
         }
 
         if(pauseScreenShown == true)
@@ -306,6 +319,7 @@ public class UI : MonoBehaviour {
     {
         Debug.Log("Main Menu");
         SceneManager.LoadScene("Main Menu");
+        UnPauseGame();
     }
 
     public void MenuNo()
@@ -330,6 +344,31 @@ public class UI : MonoBehaviour {
     {
         pauseScreen.SetActive(true);
         desktopPrompt.SetActive(false);
+    }
+
+    public void DeathYes()
+    {
+        SceneManager.LoadScene("Main");
+        UnPauseGame();
+    }
+
+    public void DeathNo()
+    {
+        deathScreen.SetActive(false);
+        SceneManager.LoadScene("Main Menu");
+        UnPauseGame();
+    }
+
+    public void EscapeYes()
+    {
+        UnPauseGame();
+        SceneManager.LoadScene("Main");
+    }
+
+    public void EscapeNo()
+    {
+        UnPauseGame();
+        SceneManager.LoadScene("Main Menu");
     }
 
     void SettingTexts()

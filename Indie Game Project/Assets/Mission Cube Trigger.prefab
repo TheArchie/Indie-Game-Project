@@ -37,8 +37,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1310346469504142}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.5, y: 0.5, z: -6.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 28.5, y: 1.5, z: 42.5}
+  m_LocalScale: {x: 7, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -109,10 +109,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAttributes: {fileID: 0}
   uiController: {fileID: 0}
-  xpReward: 0
-  questTitle: All Alone
+  xpReward: 50
+  questTitle: A Strange Discovery
   questDescription: After waking up you have discovered that you are the only one
     left on your ship. Look around for evidence on the whereabouts of your shipmates.
-  questsubOjective: Traverse the Ship and discover what has happened. Searching the
-    nearby bedrooms should be a good place to start.
-  objective: 'Mission Added: All Alone'
+  questsubOjective: "The kitchen appears to be in a right mess, it\u2019s like people
+    left in a hurry, I should continue my search to find out the whereabouts of my
+    shipmates. "
+  objective: 'Mission Updated: Continue Your Search'

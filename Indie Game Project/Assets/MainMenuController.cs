@@ -36,6 +36,8 @@ public class MainMenuController : MonoBehaviour {
         titleText.enabled = true;
 
         fade.SetActive(false);
+
+        FindObjectOfType<AudioManager>().Play("MainMenuTheme");
 	}
 	
 	// Update is called once per frame
@@ -51,7 +53,6 @@ public class MainMenuController : MonoBehaviour {
         //titleText.enabled = false;
 
         fade.SetActive(true);
-
         anim.SetTrigger("fadeOut");
 
         //StartCoroutine(ChangeCutscence());
@@ -84,6 +85,16 @@ public class MainMenuController : MonoBehaviour {
     {
         mainmenu.SetActive(true);
         quitPrompt.SetActive(false);
+    }
+
+    public void ButtonHover()
+    {
+        FindObjectOfType<AudioManager>().Play("ButtonHover");
+    }
+
+    public void ButtonClick()
+    {
+        FindObjectOfType<AudioManager>().Play("ButtonClick");
     }
 
     public void FadeIn()

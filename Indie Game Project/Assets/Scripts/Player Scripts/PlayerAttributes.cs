@@ -97,7 +97,9 @@ public class PlayerAttributes : MonoBehaviour {
         playerAtts.currentXp = 0f;
         playerAtts.xpNextLevel = 250f;
         playerAtts.abilityPoints = 0;
-        playerAtts.skillPoints = 0;
+        playerAtts.skillPoints = 10;
+
+        UIController.warningText.text = "You Have " + playerAtts.skillPoints + " Skill Points and " + playerAtts.abilityPoints + " Ability Points left to distribute.";
 
         //List<Mission> missions = new List<Mission>();
     }
@@ -133,6 +135,8 @@ public class PlayerAttributes : MonoBehaviour {
         playerInfo.playerisDead = true;
         {
             Debug.Log("Dead");
+            UIController.PauseGame();
+            UIController.deathScreen.SetActive(true);
         }
     }
 

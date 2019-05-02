@@ -165,6 +165,7 @@ public class Pistol : MonoBehaviour {
 
             SpawnDecal(hitInfo);
             StartCoroutine(Shooting());
+            FindObjectOfType<AudioManager>().Play("Pistol");
         }
     }
 

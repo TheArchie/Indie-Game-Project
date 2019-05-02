@@ -35,51 +35,56 @@ public class Raycast : MonoBehaviour
     {
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitInfo, distance))
         {
-            //ItemPickUpPrompt();
+            ItemPickUpPrompt();
         }
     }
     void RaycastForEnemy()
     {
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitInfo))
         {
-            DetectEnemy();
+            //DetectEnemy();
         }
     }
 
-    /*void ItemPickUpPrompt()
+    void ItemPickUpPrompt()
     {
-        if(hitInfo.transform.gameObject.tag == "Weapon")
+        if(hitInfo.transform.gameObject.tag == "Weapon" || hitInfo.transform.gameObject.tag == "Computer" || hitInfo.transform.gameObject.tag == "Enemy")
         {
-            enemyText.enabled = true;
-            enemyText.text = "Press E to Pickup " + hitInfo.transform.gameObject.name;
-            enemyText.color = Color.white;
+            if(hitInfo.transform.gameObject.tag == "Weapon")
+            {
+                enemyText.enabled = true;
+                enemyText.text = "Press E to Pickup " + hitInfo.transform.gameObject.name;
+                enemyText.color = Color.white;
+            }else if (hitInfo.transform.gameObject.tag == "Computer")
+            {
+                enemyText.enabled = true;
+                enemyText.text = "Required Sciecne 25";
+                enemyText.color = Color.green;
+            }else if(hitInfo.transform.gameObject.tag == "Enemy")
+            {
+                enemyText.enabled = true;
+                enemyText.text = hitInfo.transform.gameObject.name;
+                enemyText.color = Color.red;
+            }
+            else
+            {
+                enemyText.enabled = false;
+                Debug.Log("Nothing Detected");
+            }
         }
+    }
 
-        if(hitInfo.transform.gameObject.tag == "Computer")
-        {
-            enemyText.enabled = true;
-            enemyText.text = "Required Sciecne 25";
-            enemyText.color = Color.green;
-        }
-
-        if (hitInfo.transform.gameObject.tag == "RepairPart")
-        {
-            enemyText.enabled = true;
-            enemyText.text = "Press E to Pickup " + hitInfo.transform.gameObject.name;
-            enemyText.color = Color.white;
-        }
-    }*/
-
-    void DetectEnemy()
+    /*void DetectEnemy()
     {
         if(hitInfo.transform.gameObject.tag == "Enemy")
         {
             enemyText.enabled = true;
             enemyText.text = hitInfo.transform.gameObject.name;
             enemyText.color = Color.red;
-        }else if(hitInfo.transform.gameObject.tag != "Enemy")
+        }
+        else if(hitInfo.transform.gameObject.tag != "Enemy")
         {
             enemyText.enabled = false;
         }
-    }
+    }*/
 }

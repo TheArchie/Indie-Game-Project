@@ -9,10 +9,8 @@ public class GameController : MonoBehaviour {
 
     public bool cursorLock;
 
-
-    //public PlayerAttributes playeratts;
-
-
+    private PlayerAttributes player;
+    private UI uiController;
 
     // Use this for initialization
     void Start ()
@@ -20,7 +18,7 @@ public class GameController : MonoBehaviour {
         //hand.SetActive(false);
         //deathCam.enabled = false;
         LockMouse();
-        //playeratts = GetComponent<PlayerAttributes>();
+        FindObjectOfType<AudioManager>().Play("MainTheme");
     }
 	
 	// Update is called once per frame

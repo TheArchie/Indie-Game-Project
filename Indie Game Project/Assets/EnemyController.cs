@@ -39,7 +39,6 @@ public class EnemyController : MonoBehaviour {
         {
             agent.SetDestination(target.position);
             lookRadius = persuitlookRadius;
-            Debug.Log("Distance is " + distance);
 
             if (distance <= agent.stoppingDistance)
             {
